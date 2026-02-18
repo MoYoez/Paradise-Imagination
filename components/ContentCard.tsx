@@ -22,9 +22,9 @@ export function ContentCard({ children, className = "" }: ContentCardProps) {
         display: "flex",
         flexDirection: "column",
         maxHeight: "100%",
+        width: "60vw",
+        maxWidth: "100%",
         minWidth: "min(100%, 320px)",
-        width: "100%",
-        maxWidth: "min(100%, 420px)",
       }}
     >
       <div

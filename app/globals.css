@@ -237,6 +237,36 @@
 .section-content-html ul, .section-content-html ol { margin: 0 0 0.75em; padding-left: 1.25em; }
 .section-content-html li { margin-bottom: 0.25em; }
 
+/* Console-like 终端风格：用于 imagery 或文字段，末尾带等待的 ... 动画 */
+.console-like {
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", "Fira Code", Menlo, Consolas, monospace;
+  font-size: 0.9375rem;
+  padding: 0.5rem 0.75rem 0.5rem 0.875rem;
+  border-radius: var(--radius-md);
+  border-left: 3px solid rgba(0, 0, 0, 0.18);
+  background: rgba(0, 0, 0, 0.04);
+  color: inherit;
+}
+.console-like__prompt {
+  color: rgba(0, 0, 0, 0.45);
+  user-select: none;
+}
+.console-like__dots {
+  display: inline-flex;
+  align-items: baseline;
+  margin-left: 0.05em;
+}
+.console-like__dot {
+  animation: console-dot-blink 1.2s ease-in-out infinite;
+}
+.console-like__dot:nth-child(1) { animation-delay: 0s; }
+.console-like__dot:nth-child(2) { animation-delay: 0.2s; }
+.console-like__dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes console-dot-blink {
+  0%, 60%, 100% { opacity: 0.35; }
+  30% { opacity: 1; }
+}
+
 @keyframes float-down {
   to { transform: translateY(100vh) rotate(10deg); }
 }
@@ -248,7 +278,8 @@
 
 .rainbow-wheel-wrap--vertical {
   width: 100%;
-  max-width: 140px;
+  max-width: min(140px, 12vw);
+  min-width: min(100px, 10vw);
   overflow: hidden;
 }
 .rainbow-wheel--three {

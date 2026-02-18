@@ -3,6 +3,7 @@
 import { useTheme } from "@/contexts/ThemeContext";
 import { getThemeById, THEME_PASTEL } from "@/lib/theme-config";
 import { getSectionPage } from "@/content";
+import { ConsoleLike } from "@/components/ConsoleLike";
 
 export function SectionContent() {
   const { activeTheme } = useTheme();
@@ -19,8 +20,14 @@ export function SectionContent() {
       <h2 style={{ margin: "0 0 0.5rem", fontSize: "1.25rem", fontWeight: 600 }}>
         {theme.section}
       </h2>
-      <p style={{ margin: 0, color: THEME_PASTEL[activeTheme], fontSize: "0.9375rem", fontWeight: 500 }}>
-        {page.imagery}
+      <p style={{ margin: 0, fontSize: "0.9375rem", fontWeight: 500, color: THEME_PASTEL[activeTheme] }}>
+        {page.imageryConsoleLike ? (
+          <ConsoleLike prompt="$ " style={{ color: THEME_PASTEL[activeTheme] }}>
+            {page.imagery}
+          </ConsoleLike>
+        ) : (
+          page.imagery
+        )}
       </p>
       <div
         className="section-content-html"

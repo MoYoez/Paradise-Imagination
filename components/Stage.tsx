@@ -60,7 +60,7 @@ const wheelAreaStyle: React.CSSProperties = {
 
 const cardAreaStyle: React.CSSProperties = {
   width: "100%",
-  maxWidth: "90%",
+  maxWidth: "min(60vw, 100%)",
   height: "100%",
   minHeight: 0,
   display: "flex",
