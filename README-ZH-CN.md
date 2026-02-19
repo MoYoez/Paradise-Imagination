@@ -100,4 +100,4 @@ npm start
 ## 相关
 
 - 背景使用了 https://www.pixiv.net/artworks/76371065
--  MIT
+-  AGPL - V3

@@ -100,4 +100,4 @@ For more ways to reach out (email, Discord, etc.), see the **Wisteria / 联系**
 ## Related
 
 - Background artwork: https://www.pixiv.net/artworks/76371065
-- MIT
+- AGPL - V3
