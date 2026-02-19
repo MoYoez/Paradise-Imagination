@@ -5,10 +5,11 @@ import { FaBlog, FaMusic } from "react-icons/fa";
 import { SiGithub, SiTencentqq, SiX, SiMastodon, SiDiscord } from "react-icons/si";
 import { BlockCard } from "@/components/BlockCard";
 
-export const imagery = "❤ Link To My Social Network";
+export const imagery = "Link to my social network";
 
 const WISTERIA = "var(--color-wisteria, #c8b8d8)";
 
+// you can put your links here.
 const links = [
   {
     icon: SiGithub,
@@ -49,7 +50,7 @@ const links = [
   {
     icon: SiDiscord,
     label: "Discord",
-    handle: "529604493642301449",
+    handle: "MoeMagicMango",
     href: "https://discord.com/users/529604493642301449",
   },
 ] as const;
