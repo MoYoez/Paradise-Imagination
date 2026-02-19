@@ -30,7 +30,7 @@ export function MobileNav() {
             aria-label={getThemeById(id).section}
             aria-pressed={isActive}
             disabled={isTransitioning}
-            onClick={() => requestThemeChange(id)}
+            onClick={() => requestThemeChange(id, true)}
             style={{
               width: 28,
               height: 28,

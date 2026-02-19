@@ -5,7 +5,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { THEME_IDS, THEME_PASTEL, getThemeById, getThemeIndex } from "@/lib/theme-config";
 
 const N = THEME_IDS.length;
-const ROLL_DURATION_MS = 500;
+const ROLL_DURATION_MS = 300; // set roll to 300ms.
 const JUST_SELECTED_ANIMATION_MS = 400;
 const ENTERING_ANIMATION_MS = 250;
 

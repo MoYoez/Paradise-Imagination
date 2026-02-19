@@ -17,7 +17,7 @@ interface ThemeContextValue {
   setHasCompletedEntrance: (v: boolean) => void;
   isTransitioning: boolean;
   setTransitioning: (v: boolean) => void;
-  requestThemeChange: (id: ThemeId) => void;
+  requestThemeChange: (id: ThemeId, immediate?: boolean) => void;
 }
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
@@ -40,15 +40,17 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const requestThemeChange = useCallback(
-    (id: ThemeId) => {
+    (id: ThemeId, immediate = false) => {
       if (id === activeTheme || isTransitioning) return;
       setTransitioning(true);
-      setTimeout(() => {
+      if (immediate) {
         setActiveThemeState(id);
-      }, DURATIONS.take);
-      setTimeout(() => {
-        setTransitioning(false);
-      }, TOTAL_TRANSITION - DURATIONS.deal);
+        const lockMs = 280;
+        setTimeout(() => setTransitioning(false), lockMs);
+      } else {
+        setTimeout(() => setActiveThemeState(id), DURATIONS.take);
+        setTimeout(() => setTransitioning(false), TOTAL_TRANSITION - DURATIONS.deal);
+      }
     },
     [activeTheme, isTransitioning]
   );
