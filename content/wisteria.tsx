@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { FaBlog, FaMusic } from "react-icons/fa";
-import { SiGithub, SiTencentqq, SiX, SiMastodon } from "react-icons/si";
+import { SiGithub, SiTencentqq, SiX, SiMastodon, SiDiscord } from "react-icons/si";
 import { BlockCard } from "@/components/BlockCard";
 
 export const imagery = "❤ Link To My Social Network";
@@ -45,6 +45,12 @@ const links = [
     label: "Mastodon",
     handle: "MoeMagicMango@hello.2heng.xin",
     href: "https://hello.2heng.xin/web/@moyoez",
+  },
+  {
+    icon: SiDiscord,
+    label: "Discord",
+    handle: "529604493642301449",
+    href: "https://discord.com/users/529604493642301449",
   },
 ] as const;
 
