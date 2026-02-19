@@ -1,4 +1,4 @@
-
+[中文](README-ZH-CN.md) | **English**
 
 > What is Paradise? I don't know — maybe on the rainbow?
 
@@ -95,3 +95,9 @@ Example `package.json` for Node version:
 ## Contact
 
 For more ways to reach out (email, Discord, etc.), see the **Wisteria / 联系** section on the site or the links in the repo author profile.
+
+
+## Related
+
+- Background artwork: https://www.pixiv.net/artworks/76371065
+- MIT
