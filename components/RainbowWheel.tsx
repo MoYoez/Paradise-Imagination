@@ -19,10 +19,12 @@ function nextIndex(i: number): number {
 export function RainbowWheel() {
   const { activeTheme, requestThemeChange, isTransitioning } = useTheme();
   const [rollingDirection, setRollingDirection] = useState<"prev" | "next" | null>(null);
+  const [rollJustEnded, setRollJustEnded] = useState(false);
   const [justSelected, setJustSelected] = useState(false);
   const [prevEntering, setPrevEntering] = useState(false);
   const [nextEntering, setNextEntering] = useState(false);
   const rollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const rollEndedTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const animationTimeoutsRef = useRef<{ justSelected: ReturnType<typeof setTimeout> | null; entering: ReturnType<typeof setTimeout> | null }>({ justSelected: null, entering: null });
 
   const activeIndex = getThemeIndex(activeTheme);
@@ -35,9 +37,17 @@ export function RainbowWheel() {
         ? THEME_IDS[(activeIndex - 2 + N) % N]
         : null;
 
+  const ROLL_SETTLE_MS = 220;
+
   const clearRollAndStartAnimations = useCallback(() => {
     setRollingDirection(null);
     rollTimeoutRef.current = null;
+    setRollJustEnded(true);
+    if (rollEndedTimeoutRef.current) clearTimeout(rollEndedTimeoutRef.current);
+    rollEndedTimeoutRef.current = setTimeout(() => {
+      setRollJustEnded(false);
+      rollEndedTimeoutRef.current = null;
+    }, ROLL_SETTLE_MS);
     setJustSelected(true);
     setPrevEntering(true);
     setNextEntering(true);
@@ -72,6 +82,7 @@ export function RainbowWheel() {
     return () => {
       const rollId = rollTimeoutRef.current;
       if (rollId) clearTimeout(rollId);
+      if (rollEndedTimeoutRef.current) clearTimeout(rollEndedTimeoutRef.current);
       // Need latest ref at cleanup to clear timeouts set during roll
       // eslint-disable-next-line react-hooks/exhaustive-deps -- ref.current intentionally read in cleanup
       const anim = animationTimeoutsRef.current;
@@ -88,7 +99,7 @@ export function RainbowWheel() {
       role="radiogroup"
     >
       <div
-        className={`rainbow-wheel rainbow-wheel--three ${isRolling ? `rainbow-wheel--rolling-${rollingDirection}` : ""}`}
+        className={`rainbow-wheel rainbow-wheel--three ${isRolling ? `rainbow-wheel--rolling-${rollingDirection}` : ""} ${rollJustEnded ? "rainbow-wheel--roll-ended" : ""}`}
       >
         <div
           className={`wheel-slot wheel-slot--current${justSelected ? " wheel-slot--just-selected" : ""}`}

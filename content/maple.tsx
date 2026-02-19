@@ -1,17 +1,33 @@
-import { FaTag } from "react-icons/fa";
+import { FaTag, FaGlobe, FaCogs, FaUser } from "react-icons/fa";
+import { SiUbuntu, SiApple, SiGit } from "react-icons/si";
 import { BlockCard } from "@/components/BlockCard";
+import { LeafTag } from "@/components/LeafTag";
 
+const iconStyleInLeaf = { color: "rgba(255,255,255,0.95)", flexShrink: 0 } as const;
 
 export const imagery = "! ✨ [Thinking...] No output and go to sleep 😴";
 export const imageryConsoleLike = true; // require enable in index.ts to show console-like style
+
 
 const AVATAR_URL = "https://gravatar.com/avatar/24972965681ebfcf8369dcecbc7080fa?size=256";
 const NAME = "MoeMagicMango";
 const TAG = "#Magician";
 
+const NICKNAMES = [
+  {
+    name: "MoYoez",
+  },
+  {
+    name: "KoiParadise",
+  },
+]
+const FooterContent = '心が向かうところへ、たとえ素足でも進んで行く | Always try to seek for Stellar and Dream 💫';
+
 export default function MapleContent() {
   return (
-    <><div>
+    <>
+    <div className="about-content-reveal">
+    <div>
       <hr
         style={{
           margin: "0 0 1.25rem",
@@ -100,20 +116,106 @@ export default function MapleContent() {
           style={{
             flex: 1,
             minWidth: 0,
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.75rem",
             fontSize: "0.875rem",
             lineHeight: 1.65,
             color: "#333",
           }}
         >
-          <p style={{ margin: 0 }}>
-            
-          </p>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "7.5rem 1fr",
+              gap: "0.5rem 0.75rem",
+              alignItems: "center",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "0.35rem",
+              }}
+            >
+              <FaUser size={14} style={{ color: "var(--color-maple, #e8b4a0)", flexShrink: 0 }} aria-hidden />
+              <span
+                style={{
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  color: "var(--color-maple, #e8b4a0)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.04em",
+                }}
+              >
+                Known As
+              </span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "nowrap" }}>
+                {NICKNAMES.map((nickname) => (
+                <LeafTag color="var(--color-maple, #e8b4a0)" key={nickname.name}>{nickname.name}</LeafTag>
+              ))}
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "0.35rem",
+              }}
+            >
+              <FaGlobe size={14} style={{ color: "var(--color-maple, #e8b4a0)", flexShrink: 0 }} aria-hidden />
+              <span
+                style={{
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  color: "var(--color-maple, #e8b4a0)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.04em",
+                }}
+              >
+                Language
+              </span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "nowrap" }}>
+              <LeafTag color="var(--color-maple, #e8b4a0)">汉语</LeafTag>
+              <LeafTag color="var(--color-maple, #e8b4a0)">漢語</LeafTag>
+              <LeafTag color="var(--color-maple, #e8b4a0)">English</LeafTag>
+              <LeafTag color="var(--color-maple, #e8b4a0)">Japanese</LeafTag>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "0.35rem",
+              }}
+            >
+              <FaCogs size={14} style={{ color: "var(--color-maple, #e8b4a0)", flexShrink: 0 }} aria-hidden />
+              <span
+                style={{
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  color: "var(--color-maple, #e8b4a0)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.04em",
+                }}
+              >
+                DevOps
+              </span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "nowrap" }}>
+              <LeafTag icon={<SiUbuntu size={12} style={iconStyleInLeaf} />} color="var(--color-maple, #e8b4a0)">Ubuntu</LeafTag>
+              <LeafTag icon={<SiApple size={12} style={iconStyleInLeaf} />} color="var(--color-maple, #e8b4a0)">MacOS</LeafTag>
+              <LeafTag icon={<SiGit size={12} style={iconStyleInLeaf} />} color="var(--color-maple, #e8b4a0)">Git</LeafTag>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    </div>
     <BlockCard>
         <p>
-          Stay hungry, stay foolish.
+          {FooterContent}
         </p>
       </BlockCard></>
   );

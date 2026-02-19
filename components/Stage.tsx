@@ -1,14 +1,24 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { ContentCard } from "@/components/ContentCard";
 import { RainbowWheel } from "@/components/RainbowWheel";
 import { MobileNav } from "@/components/MobileNav";
 import { SectionContent } from "@/components/SectionContent";
 import { EntranceEffect } from "@/components/EntranceEffect";
+import { IframeEmbed } from "@/components/IframeEmbed";
 import { useTheme } from "@/contexts/ThemeContext";
 
+const NETEASE_PLAYER_SRC =
+  "https://music.163.com/outchain/player?type=2&id=2137574903&auto=0&height=66";
+
 export function Stage() {
-  const { hasCompletedEntrance } = useTheme();
+  const { hasCompletedEntrance, activeTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
     <>
@@ -20,6 +30,46 @@ export function Stage() {
         <div className="stage-card-area" style={cardAreaStyle}>
           <ContentCard>
             <SectionContent />
+            <div
+              style={{
+                display: activeTheme === "maple" ? "block" : "none",
+                marginTop: "1rem",
+              }}
+              aria-hidden={activeTheme !== "maple"}
+            >
+              <div
+                style={{
+                  fontSize: "0.9375rem",
+                  fontWeight: 600,
+                  marginBottom: "0.375rem",
+                  color: "var(--text-secondary, #555)",
+                }}
+              >
+                Music Player
+              </div>
+              {mounted ? (
+                <IframeEmbed
+                  src={NETEASE_PLAYER_SRC}
+                  width={330}
+                  height={86}
+                  title="Music Player"
+                />
+              ) : (
+                <div style={{ width: 330, height: 86 }} aria-hidden />
+              )}
+              <blockquote
+                style={{
+                  margin: "0.5rem 0 0",
+                  paddingLeft: "0.75rem",
+                  borderLeft: "3px solid var(--text-secondary, #999)",
+                  fontSize: "0.8125rem",
+                  color: "var(--text-secondary, #555)",
+                  fontStyle: "italic",
+                }}
+              >
+                原因: My Favorite Game Music In 2025
+              </blockquote>
+            </div>
           </ContentCard>
         </div>
         <div className="stage-wheel" style={wheelAreaStyle}>
