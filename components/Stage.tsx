@@ -31,9 +31,12 @@ export function Stage() {
           <ContentCard>
             <SectionContent />
             <div
+              className="maple-player-wrap"
               style={{
                 display: activeTheme === "maple" ? "block" : "none",
                 marginTop: "1rem",
+                width: "100%",
+                maxWidth: "100%",
               }}
               aria-hidden={activeTheme !== "maple"}
             >
@@ -50,12 +53,12 @@ export function Stage() {
               {mounted ? (
                 <IframeEmbed
                   src={NETEASE_PLAYER_SRC}
-                  width={330}
+                  width="100%"
                   height={86}
                   title="Music Player"
                 />
               ) : (
-                <div style={{ width: 330, height: 86 }} aria-hidden />
+                <div className="maple-player-placeholder" aria-hidden />
               )}
               <blockquote
                 style={{
@@ -110,7 +113,7 @@ const wheelAreaStyle: React.CSSProperties = {
 
 const cardAreaStyle: React.CSSProperties = {
   width: "100%",
-  maxWidth: "min(60vw, 100%)",
+  maxWidth: "min(80vw, 100%)",
   height: "100%",
   minHeight: 0,
   display: "flex",

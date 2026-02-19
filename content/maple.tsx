@@ -21,7 +21,7 @@ const NICKNAMES = [
     name: "KoiParadise",
   },
 ]
-const FooterContent = '心が向かうところへ、たとえ素足でも進んで行く | Always try to seek for Stellar and Dream 💫';
+const FooterContent = 'Always try to seek for Stellar and Dream 💫';
 
 export default function MapleContent() {
   return (
@@ -35,12 +35,14 @@ export default function MapleContent() {
           borderTop: "1px solid rgba(0,0,0,0.08)",
         }} />
       <div
+        className="maple-about-row"
         style={{
           display: "flex",
           gap: "1.5rem",
           alignItems: "flex-start",
         }}
       >
+        <div className="maple-about-avatar-wrap" style={{ alignItems: "center" }}>
         <div
           style={{
             flexShrink: 0,
@@ -111,7 +113,7 @@ export default function MapleContent() {
             {TAG}
           </p>
         </div>
-
+        </div>
         <div
           style={{
             flex: 1,
@@ -125,6 +127,7 @@ export default function MapleContent() {
           }}
         >
           <div
+            className="maple-about-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "7.5rem 1fr",
@@ -152,7 +155,7 @@ export default function MapleContent() {
                 Known As
               </span>
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "nowrap" }}>
+            <div className="maple-about-tags" style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "nowrap" }}>
                 {NICKNAMES.map((nickname) => (
                 <LeafTag color="var(--color-maple, #e8b4a0)" key={nickname.name}>{nickname.name}</LeafTag>
               ))}
@@ -177,7 +180,7 @@ export default function MapleContent() {
                 Language
               </span>
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "nowrap" }}>
+            <div className="maple-about-tags" style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "nowrap" }}>
               <LeafTag color="var(--color-maple, #e8b4a0)">汉语</LeafTag>
               <LeafTag color="var(--color-maple, #e8b4a0)">漢語</LeafTag>
               <LeafTag color="var(--color-maple, #e8b4a0)">English</LeafTag>
@@ -203,7 +206,7 @@ export default function MapleContent() {
                 DevOps
               </span>
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "nowrap" }}>
+            <div className="maple-about-tags" style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "nowrap" }}>
               <LeafTag icon={<SiUbuntu size={12} style={iconStyleInLeaf} />} color="var(--color-maple, #e8b4a0)">Ubuntu</LeafTag>
               <LeafTag icon={<SiApple size={12} style={iconStyleInLeaf} />} color="var(--color-maple, #e8b4a0)">MacOS</LeafTag>
               <LeafTag icon={<SiGit size={12} style={iconStyleInLeaf} />} color="var(--color-maple, #e8b4a0)">Git</LeafTag>

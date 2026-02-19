@@ -12,21 +12,11 @@ const TEMPLATE_REPO_URL = "https://github.com/MoYoez/Paradise-Imagination";
 export function AppShell({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider>
-      <BackgroundByTheme />
-      <EntranceWhiteOverlay />
-      {children}
-      <footer
-        className="layout-footer"
-        style={{
-          position: "fixed",
-          bottom: 0,
-          right: 0,
-          padding: "0.5rem 1rem",
-          fontSize: "0.75rem",
-          color: "var(--text-secondary, #999999)",
-          zIndex: 2,
-        }}
-      >
+      <div className="layout-main">
+        <BackgroundByTheme />
+        <EntranceWhiteOverlay />
+        {children}
+        <footer className="layout-footer">
         Copyright © 2025-2026 IsoHark0x (HiMoYo). |{" "}
         <Link
           href={TEMPLATE_REPO_URL}
@@ -44,6 +34,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           Fork this template on GitHub
         </Link>
       </footer>
+      </div>
     </ThemeProvider>
   );
 }

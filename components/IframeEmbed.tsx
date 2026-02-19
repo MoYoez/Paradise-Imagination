@@ -1,5 +1,7 @@
 "use client";
 
+import type { CSSProperties } from "react";
+
 interface IframeEmbedProps {
   src: string;
   width?: number | string;
@@ -18,15 +20,23 @@ export function IframeEmbed({
   className = "",
 }: IframeEmbedProps) {
   const resolvedSrc = src.startsWith("//") ? `https:${src}` : src;
+  const widthNum = typeof width === "number";
+  const heightNum = typeof height === "number";
+  const style: CSSProperties = {
+    border: 0,
+    margin: 0,
+    display: "block",
+    ...(widthNum ? {} : { width: width as string, maxWidth: "100%" }),
+    ...(heightNum ? {} : { height: height as string }),
+  };
 
   return (
     <iframe
       title={title}
       src={resolvedSrc}
-      width={typeof width === "number" ? width : width}
-      height={typeof height === "number" ? height : height}
-      frameBorder={0}
-      style={{ border: 0, margin: 0, display: "block" }}
+      width={widthNum ? (width as number) : undefined}
+      height={heightNum ? (height as number) : undefined}
+      style={style}
       className={className}
       allow="autoplay; encrypted-media"
     />
