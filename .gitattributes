@@ -1,0 +1,4 @@
+# When merging main into template, keep template's content (do not merge content from main).
+# Requires one-time setup: git config merge.ours.driver true
+content/ merge=ours
+override/content/ merge=ours
