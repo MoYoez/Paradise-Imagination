@@ -34,11 +34,11 @@
 ### 安装与运行
 
 ```bash
-# 安装依赖
-npm install
+# requirement install.
+pnpm install
 
-# 启动开发服务器
-npm run dev
+# Let's roll with magic~
+pnpm run dev
 ```
 
 在浏览器中打开 [http://localhost:3000](http://localhost:3000)。
@@ -59,12 +59,11 @@ npm start
 
 ### Vercel（推荐）
 
-1. 将仓库推送到 GitHub。
-2. 打开 [vercel.com](https://vercel.com)，使用 GitHub 登录。
-3. **导入**本仓库。
-4. 保持默认配置（框架：Next.js，构建命令：`next build`，输出目录：默认）。
-5. 若使用环境变量，在 **Settings → Environment Variables** 中添加（可参考 `.env`）。
-6. 点击 **Deploy**。Vercel 会构建并托管站点并给出访问地址。
+[![Deploy with Vercel](https://vercel.com/button)](
+https://vercel.com/new/clone?repository-url=https://github.com/MoYoez/Paradise-Imagination&branch=template&env=STEAM_WEB_API_KEY&envDescription=Steam%20Web%20API%20Key&env=STEAM_USER_ID_64&envDescription=Steam%20User%20ID%20%2864-bit%29
+)
+
+> 注: 你可能需要填写 STEAM_WEB_API_KEY 和 STEAM_USER_ID_64
 
 ### 其他平台
 
