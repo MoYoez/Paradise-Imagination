@@ -34,11 +34,11 @@
 ### Install & Run
 
 ```bash
-# Install dependencies
-npm install
+# requirement install.
+pnpm install
 
-# Run development server
-npm run dev
+# Let's roll with magic~
+pnpm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
@@ -59,12 +59,10 @@ npm start
 
 ### Vercel (recommended)
 
-1. Push the repo to GitHub.
-2. Go to [vercel.com](https://vercel.com) and sign in with GitHub.
-3. **Import** this repository.
-4. Leave defaults (framework: Next.js, build: `next build`, output: default).
-5. Add environment variables in **Settings → Environment Variables** if you use any (e.g. from `.env`).
-6. Click **Deploy**. Vercel will build and host the site and give you a URL.
+[![Deploy with Vercel](https://vercel.com/button)](
+https://vercel.com/new/clone?repository-url=https://github.com/MoYoez/Paradise-Imagination&branch=template&env=STEAM_WEB_API_KEY&envDescription=Steam%20Web%20API%20Key&env=STEAM_USER_ID_64&envDescription=Steam%20User%20ID%20%2864-bit%29
+)
+
 
 ### Other platforms
 
