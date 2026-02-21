@@ -21,6 +21,11 @@ export interface SteamRecentGame {
   playtime_forever: number;
   img_icon_url: string;
   img_logo_url: string;
+  /** Platform-specific total minutes (returned by API when available) */
+  playtime_windows_forever?: number;
+  playtime_mac_forever?: number;
+  playtime_linux_forever?: number;
+  playtime_deck_forever?: number;
 }
 
 export interface GetRecentlyPlayedGamesResult {

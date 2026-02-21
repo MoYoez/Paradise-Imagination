@@ -1,0 +1,13 @@
+.entrance-white-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: rgba(255, 252, 248, 0.98);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 1.5s var(--ease-out);
+}
+.entrance-white-overlay--done {
+  opacity: 0;
+  pointer-events: none;
+}

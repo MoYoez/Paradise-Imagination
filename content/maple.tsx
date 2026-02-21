@@ -1,16 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FaTag, FaGlobe, FaCogs, FaUser } from "react-icons/fa";
+import { FaGlobe, FaCogs, FaUser } from "react-icons/fa";
 import { SiUbuntu, SiApple, SiGit } from "react-icons/si";
 import { BlockCard } from "@/components/ui/BlockCard";
 import { LeafTag } from "@/components/ui/LeafTag";
 import { IframeEmbed } from "@/components/ui/IframeEmbed";
+import { AboutUser } from "@/components/ui/AboutUser";
 
 const NETEASE_PLAYER_SRC =
   "https://music.163.com/outchain/player?type=2&id=2137574903&auto=0&height=66";
 
-const iconStyleInLeaf = { color: "rgba(255,255,255,0.95)", flexShrink: 0 } as const;
+const iconClassNameInLeaf = "text-white/95 shrink-0";
 
 export const imagery = "! ✨ [Thinking...] No output and go to sleep 😴";
 export const imageryConsoleLike = true; // require enable in index.ts to show console-like style
@@ -41,188 +42,49 @@ export default function MapleContent() {
     <>
     <div className="about-content-reveal">
     <div>
-      <hr
-        style={{
-          margin: "0 0 1.25rem",
-          border: 0,
-          borderTop: "1px solid rgba(0,0,0,0.08)",
-        }} />
-      <div
-        className="maple-about-row"
-        style={{
-          display: "flex",
-          gap: "1.5rem",
-          alignItems: "flex-start",
-        }}
-      >
-        <div className="maple-about-avatar-wrap" style={{ alignItems: "center" }}>
-        <div
-          style={{
-            flexShrink: 0,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "0.5rem",
-            minWidth: 88,
-          }}
-        >
-          <div
-            style={{
-              width: 72,
-              height: 72,
-              borderRadius: "50%",
-              overflow: "hidden",
-              background: "rgba(0,0,0,0.06)",
-            }}
-          >
-            {AVATAR_URL ? (
-              // eslint-disable-next-line @next/next/no-img-element -- Gravatar loaded in browser to avoid server-side ECONNRESET (e.g. GFW)
-              <img
-                src={AVATAR_URL}
-                alt=""
-                width={72}
-                height={72}
-                style={{ objectFit: "cover", width: "100%", height: "100%", display: "block" }} />
-            ) : (
-              <div
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "1.5rem",
-                  color: "var(--color-maple, #e8b4a0)",
-                }}
-              >
-                ?
-              </div>
-            )}
-          </div>
-          <p
-            style={{
-              margin: 0,
-              fontSize: "0.9375rem",
-              fontWeight: 600,
-              color: "#333",
-              textAlign: "center",
-            }}
-          >
-            {NAME}
-          </p>
-          <p
-            style={{
-              margin: 0,
-              fontSize: "0.75rem",
-              color: "var(--color-maple, #e8b4a0)",
-              textAlign: "center",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "0.25rem",
-            }}
-          >
-            <FaTag size={10} aria-hidden />
-            {TAG}
-          </p>
-        </div>
-        </div>
-        <div
-          style={{
-            flex: 1,
-            minWidth: 0,
-            display: "flex",
-            flexDirection: "column",
-            gap: "0.75rem",
-            fontSize: "0.875rem",
-            lineHeight: 1.65,
-            color: "#333",
-          }}
-        >
-          <div
-            className="maple-about-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "7.5rem 1fr",
-              gap: "0.5rem 0.75rem",
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.35rem",
-              }}
-            >
-              <FaUser size={14} style={{ color: "var(--color-maple, #e8b4a0)", flexShrink: 0 }} aria-hidden />
-              <span
-                style={{
-                  fontSize: "0.75rem",
-                  fontWeight: 600,
-                  color: "var(--color-maple, #e8b4a0)",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.04em",
-                }}
-              >
+      <hr className="mb-5 border-0 border-t border-black/[0.08]" />
+      <div className="maple-about-row flex gap-6 items-start">
+        <AboutUser
+          avatarUrl={AVATAR_URL}
+          name={NAME}
+          tag={TAG}
+          accentColor="var(--color-maple, #e8b4a0)"
+        />
+        <div className="flex-1 min-w-0 flex flex-col gap-3 text-sm leading-[1.65] text-[#333]">
+          <div className="maple-about-grid grid gap-x-3 gap-y-2.5 items-center grid-cols-[7.5rem_1fr]">
+            <div className="flex items-center gap-[0.35rem]">
+              <FaUser size={14} className="text-maple shrink-0" aria-hidden />
+              <span className="text-xs font-semibold text-maple uppercase tracking-wide">
                 Known As
               </span>
             </div>
-            <div className="maple-about-tags" style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "nowrap" }}>
+            <div className="maple-about-tags flex items-center gap-2 flex-nowrap">
                 {NICKNAMES.map((nickname) => (
                 <LeafTag color="var(--color-maple, #e8b4a0)" key={nickname.name}>{nickname.name}</LeafTag>
               ))}
             </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.35rem",
-              }}
-            >
-              <FaGlobe size={14} style={{ color: "var(--color-maple, #e8b4a0)", flexShrink: 0 }} aria-hidden />
-              <span
-                style={{
-                  fontSize: "0.75rem",
-                  fontWeight: 600,
-                  color: "var(--color-maple, #e8b4a0)",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.04em",
-                }}
-              >
+            <div className="flex items-center gap-[0.35rem]">
+              <FaGlobe size={14} className="text-maple shrink-0" aria-hidden />
+              <span className="text-xs font-semibold text-maple uppercase tracking-wide">
                 Language
               </span>
             </div>
-            <div className="maple-about-tags" style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "nowrap" }}>
+            <div className="maple-about-tags flex items-center gap-2 flex-nowrap">
               <LeafTag color="var(--color-maple, #e8b4a0)">汉语</LeafTag>
               <LeafTag color="var(--color-maple, #e8b4a0)">漢語</LeafTag>
               <LeafTag color="var(--color-maple, #e8b4a0)">English</LeafTag>
               <LeafTag color="var(--color-maple, #e8b4a0)">Japanese</LeafTag>
             </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.35rem",
-              }}
-            >
-              <FaCogs size={14} style={{ color: "var(--color-maple, #e8b4a0)", flexShrink: 0 }} aria-hidden />
-              <span
-                style={{
-                  fontSize: "0.75rem",
-                  fontWeight: 600,
-                  color: "var(--color-maple, #e8b4a0)",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.04em",
-                }}
-              >
+            <div className="flex items-center gap-[0.35rem]">
+              <FaCogs size={14} className="text-maple shrink-0" aria-hidden />
+              <span className="text-xs font-semibold text-maple uppercase tracking-wide">
                 DevOps
               </span>
             </div>
-            <div className="maple-about-tags" style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "nowrap" }}>
-              <LeafTag icon={<SiUbuntu size={12} style={iconStyleInLeaf} />} color="var(--color-maple, #e8b4a0)">Ubuntu</LeafTag>
-              <LeafTag icon={<SiApple size={12} style={iconStyleInLeaf} />} color="var(--color-maple, #e8b4a0)">MacOS</LeafTag>
-              <LeafTag icon={<SiGit size={12} style={iconStyleInLeaf} />} color="var(--color-maple, #e8b4a0)">Git</LeafTag>
+            <div className="maple-about-tags flex items-center gap-2 flex-nowrap">
+              <LeafTag icon={<SiUbuntu size={12} className={iconClassNameInLeaf} />} color="var(--color-maple, #e8b4a0)">Ubuntu</LeafTag>
+              <LeafTag icon={<SiApple size={12} className={iconClassNameInLeaf} />} color="var(--color-maple, #e8b4a0)">MacOS</LeafTag>
+              <LeafTag icon={<SiGit size={12} className={iconClassNameInLeaf} />} color="var(--color-maple, #e8b4a0)">Git</LeafTag>
             </div>
           </div>
         </div>
@@ -234,22 +96,8 @@ export default function MapleContent() {
           {FooterContent}
         </p>
       </BlockCard>
-      <div
-        className="maple-player-wrap"
-        style={{
-          marginTop: "1rem",
-          width: "100%",
-          maxWidth: "100%",
-        }}
-      >
-        <div
-          style={{
-            fontSize: "0.9375rem",
-            fontWeight: 600,
-            marginBottom: "0.375rem",
-            color: "var(--text-secondary, #555)",
-          }}
-        >
+      <div className="maple-player-wrap mt-4 w-full max-w-full">
+        <div className="text-[0.9375rem] font-semibold mb-1.5 text-[var(--text-secondary,#555)]">
           Music Player
         </div>
         {mounted ? (
@@ -262,16 +110,7 @@ export default function MapleContent() {
         ) : (
           <div className="maple-player-placeholder" aria-hidden />
         )}
-        <blockquote
-          style={{
-            margin: "0.5rem 0 0",
-            paddingLeft: "0.75rem",
-            borderLeft: "3px solid var(--text-secondary, #999)",
-            fontSize: "0.8125rem",
-            color: "var(--text-secondary, #555)",
-            fontStyle: "italic",
-          }}
-        >
+        <blockquote className="mt-2 pl-3 border-l-[3px] border-[var(--text-secondary,#999)] text-[0.8125rem] text-[var(--text-secondary,#555)] italic">
           原因: My Favorite Game Music In 2025
         </blockquote>
       </div>

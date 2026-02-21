@@ -7,20 +7,7 @@ export function MobileNav() {
   const { activeTheme, requestThemeChange, isTransitioning } = useTheme();
 
   return (
-    <nav
-      className="mobile-nav"
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "0.5rem",
-        padding: "0.75rem 1rem",
-        background: "var(--color-veil)",
-        borderRadius: "var(--radius-md)",
-        boxShadow: "var(--shadow-diffuse)",
-        margin: "0 1rem 1rem",
-      }}
-    >
+    <nav className="mobile-nav flex items-center justify-center gap-2 py-3 px-4 bg-[var(--color-veil)] rounded-[var(--radius-md)] shadow-[var(--shadow-diffuse)] mx-4 mb-4">
       {THEME_IDS.map((id) => {
         const isActive = id === activeTheme;
         return (
@@ -31,14 +18,9 @@ export function MobileNav() {
             aria-pressed={isActive}
             disabled={isTransitioning}
             onClick={() => requestThemeChange(id, true)}
+            className={`w-7 h-7 rounded-full border-2 shrink-0 transition-[transform,opacity,background,border-color] duration-[var(--duration-theme-ui)] ease-[var(--ease-out)] ${isActive ? "opacity-100 border-black/15" : "opacity-80 border-transparent"} ${isTransitioning ? "cursor-not-allowed" : "cursor-pointer"}`}
             style={{
-              width: 28,
-              height: 28,
-              borderRadius: "50%",
               background: THEME_PASTEL[id],
-              border: isActive ? "2px solid rgba(0,0,0,0.15)" : "none",
-              opacity: isActive ? 1 : 0.8,
-              cursor: isTransitioning ? "not-allowed" : "pointer",
               transition: "transform 0.2s var(--ease-out), opacity var(--duration-theme-ui) var(--ease-out), background var(--duration-theme-ui) var(--ease-out), border-color var(--duration-theme-ui) var(--ease-out)",
             }}
           />

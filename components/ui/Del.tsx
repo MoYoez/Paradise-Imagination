@@ -7,7 +7,7 @@ interface DelProps {
 
 export function Del({ children }: DelProps) {
   return (
-    <span style={{ textDecoration: "line-through", color: "#888" }}>
+    <span className="line-through text-[#888]">
       {children}
     </span>
   );

@@ -8,17 +8,7 @@ interface BlockCardProps {
 export function BlockCard({ children, className = "" }: BlockCardProps) {
   return (
     <div
-      className={className}
-      style={{
-        margin: "1rem 0",
-        padding: "1rem 1.25rem",
-        borderRadius: "var(--radius-md, 20px)",
-        border: "1px solid rgba(180, 170, 160, 0.25)",
-        background: "rgba(252, 250, 247, 0.7)",
-        boxShadow: "0 4px 16px rgba(0, 0, 0, 0.04)",
-        fontSize: "0.875rem",
-        lineHeight: 1.6,
-      }}
+      className={["my-4 py-4 px-5 rounded-[var(--radius-md,20px)] border border-[rgba(180,170,160,0.25)] bg-[rgba(252,250,247,0.7)] shadow-[0_4px_16px_rgba(0,0,0,0.04)] text-sm leading-[1.6]", className].filter(Boolean).join(" ")}
     >
       {children}
     </div>

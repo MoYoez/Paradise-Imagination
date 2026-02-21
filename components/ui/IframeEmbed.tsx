@@ -11,7 +11,10 @@ interface IframeEmbedProps {
   /** When not maple, parent hides via display only; do not unmount */
 }
 
-/** iframe embed for external players (e.g. Netease Music) */
+/**
+ * iframe embed for external players (e.g. Netease Music).
+ * Console errors like "Blocked a frame... cross-origin" or "Permissions policy violation"
+ */
 export function IframeEmbed({
   src,
   width = 330,

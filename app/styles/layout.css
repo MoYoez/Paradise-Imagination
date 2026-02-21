@@ -1,0 +1,54 @@
+html {
+  max-width: 100vw;
+  max-height: 100dvh;
+  overflow-x: hidden;
+}
+
+.layout-root {
+  margin: 0;
+  width: 100%;
+  max-width: 100vw;
+  min-height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #f0ebe3 0%, #e8e2d8 50%, #e2ddd4 100%);
+}
+
+.layout-main {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  height: 100%;
+}
+
+.layout-footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: auto;
+  padding: 0.5rem 1rem;
+  padding-right: max(1rem, env(safe-area-inset-right));
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  font-size: 0.75rem;
+  color: var(--text-secondary, #999999);
+  z-index: 2;
+}
+
+.content-card-body {
+  box-shadow: inset 0 1px 0 rgba(255, 252, 248, 0.6);
+  background: linear-gradient(180deg, rgba(253, 251, 248, 0.5) 0%, transparent 12%);
+}
+
+.content-card--nested {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.maple-player-placeholder {
+  width: 100%;
+  max-width: 100%;
+  height: 86px;
+  display: block;
+}

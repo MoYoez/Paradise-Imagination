@@ -1,0 +1,192 @@
+.layout-root .background-by-theme {
+  background-image: url("/background_image.jpg");
+  background-size: cover;
+  background-position: center;
+  background-color: #e8e2d8;
+  background-attachment: fixed;
+  overflow: hidden;
+  object-fit: cover;
+  object-position: center;
+  clip-path: inset(0);
+  @media (max-width: 1032px) {
+    background-position: center top;
+    background-attachment: scroll;
+    clip-path: inset(0 0 0 0);
+  }
+  @media (min-width: 1032px) {
+    background-position: center center;
+    clip-path: inset(0 0 0 0 round 0);
+  }
+}
+
+.theme-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity var(--duration-bg) var(--ease-out);
+  background: var(--theme-overlay-bg, transparent);
+}
+.theme-overlay[data-theme="maple"] { --theme-overlay-bg: radial-gradient(ellipse 80% 50% at 50% 30%, rgba(232, 160, 120, 0.2), rgba(232, 180, 160, 0.1)), rgba(0, 0, 0, 0.12); }
+.theme-overlay[data-theme="sunset"] { --theme-overlay-bg: rgba(212, 165, 181, 0.15); }
+.theme-overlay[data-theme="sand"] { --theme-overlay-bg: rgba(229, 212, 184, 0.15); }
+.theme-overlay[data-theme="forest"] { --theme-overlay-bg: rgba(168, 196, 160, 0.15); }
+.theme-overlay[data-theme="stream"] { --theme-overlay-bg: rgba(168, 200, 212, 0.15); }
+.theme-overlay[data-theme="bluebell"] { --theme-overlay-bg: rgba(184, 184, 216, 0.15); }
+.theme-overlay[data-theme="wisteria"] { --theme-overlay-bg: rgba(200, 184, 216, 0.15); }
+
+.background-by-theme .atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.background-by-theme[data-theme="maple"] .atmosphere::before {
+  content: "";
+  position: absolute;
+  left: 10%;
+  top: -20px;
+  width: 20px;
+  height: 24px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 28'%3E%3Cpath fill='%23c09070' d='M12 0C8 4 4 10 2 16c0 6 2 12 10 12s10-6 10-12c-2-6-6-12-10-16z'/%3E%3C/svg%3E") no-repeat center/contain;
+  opacity: 0.25;
+  animation: float-down 18s linear infinite;
+}
+.background-by-theme[data-theme="maple"] .atmosphere::after {
+  content: "";
+  position: absolute;
+  right: 20%;
+  top: -20px;
+  width: 16px;
+  height: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 28'%3E%3Cpath fill='%23b88868' d='M12 0C8 4 4 10 2 16c0 6 2 12 10 12s10-6 10-12c-2-6-6-12-10-16z'/%3E%3C/svg%3E") no-repeat center/contain;
+  opacity: 0.2;
+  animation: float-down 22s linear infinite 3s;
+}
+
+.background-by-theme[data-theme="sunset"] .atmosphere::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+}
+.background-by-theme[data-theme="sunset"] .atmosphere::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 100% 60% at 50% 100%, rgba(180, 120, 140, 0.08), transparent 60%);
+  pointer-events: none;
+}
+
+.background-by-theme[data-theme="sand"] .atmosphere::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  height: 50%;
+  background: repeating-linear-gradient(105deg, transparent, transparent 2px, rgba(200, 190, 170, 0.06) 2px, rgba(200, 190, 170, 0.06) 4px);
+  pointer-events: none;
+}
+.background-by-theme[data-theme="sand"] .atmosphere::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 40%;
+  height: 40%;
+  background: radial-gradient(circle at 100% 100%, rgba(210, 195, 170, 0.08), transparent 70%);
+  pointer-events: none;
+}
+
+.background-by-theme[data-theme="forest"] .atmosphere::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 30%;
+  height: 60%;
+  background: linear-gradient(90deg, rgba(60, 80, 50, 0.05) 0%, transparent 100%);
+  clip-path: polygon(0 100%, 5% 40%, 10% 100%, 18% 30%, 22% 100%, 30% 20%, 35% 100%, 0 100%);
+  pointer-events: none;
+}
+.background-by-theme[data-theme="forest"] .atmosphere::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 25%;
+  height: 55%;
+  background: linear-gradient(270deg, rgba(50, 70, 45, 0.05) 0%, transparent 100%);
+  clip-path: polygon(100% 100%, 95% 35%, 90% 100%, 82% 45%, 78% 100%, 70% 25%, 65% 100%, 100% 100%);
+  pointer-events: none;
+}
+
+.background-by-theme[data-theme="stream"] .atmosphere::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(200, 220, 230, 0.03) 50%, transparent 60%);
+  animation: stream-ripple 8s ease-in-out infinite;
+  pointer-events: none;
+}
+.background-by-theme[data-theme="stream"] .atmosphere::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(180, 210, 225, 0.04) 55%, transparent 60%);
+  animation: stream-ripple 10s ease-in-out infinite 1s;
+  pointer-events: none;
+}
+@keyframes stream-ripple {
+  0%, 100% { opacity: 0.6; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.02); }
+}
+
+.background-by-theme[data-theme="wisteria"] .atmosphere::before {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 14px;
+  left: 15%;
+  top: -10px;
+  background: rgba(200, 184, 216, 0.45);
+  border-radius: 50%;
+  clip-path: ellipse(40% 100% at 50% 50%);
+  animation: float-down 14s ease-in-out infinite;
+}
+.background-by-theme[data-theme="wisteria"] .atmosphere::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 12px;
+  right: 25%;
+  top: -10px;
+  background: rgba(200, 184, 216, 0.4);
+  border-radius: 50%;
+  clip-path: ellipse(40% 100% at 50% 50%);
+  animation: float-down 16s ease-in-out infinite 2s;
+}
+.background-by-theme[data-theme="bluebell"] .atmosphere::before {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  left: 30%;
+  bottom: 20%;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: float-up 12s ease-in-out infinite;
+}
+
+@keyframes float-down {
+  to { transform: translateY(100vh) rotate(10deg); }
+}
+@keyframes float-up {
+  0% { transform: translateY(0); opacity: 0.3; }
+  50% { opacity: 0.6; }
+  to { transform: translateY(-80vh); opacity: 0.2; }
+}

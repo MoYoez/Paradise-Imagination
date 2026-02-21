@@ -17,13 +17,7 @@ export function Footer({ copyright }: FooterProps) {
         href={TEMPLATE_REPO_URL}
         target="_blank"
         rel="noopener noreferrer"
-        style={{
-          color: "inherit",
-          textDecoration: "underline",
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "0.25rem",
-        }}
+        className="text-inherit underline inline-flex items-center gap-1"
       >
         <SiGithub size={14} aria-hidden />
         Fork this template on GitHub

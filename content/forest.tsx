@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { SiSteamdeck } from "react-icons/si";
 import { FaSteam } from "react-icons/fa";
@@ -21,6 +21,8 @@ export default function ForestContent() {
   const [data, setData] = useState<GetRecentlyPlayedGamesResult | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [openAppid, setOpenAppid] = useState<number | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     fetch("/api/steam/recent-games?count=12")
@@ -33,107 +35,123 @@ export default function ForestContent() {
       .finally(() => setLoading(false));
   }, []);
 
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
   return (
     <>
-      <div style={{ marginBottom: "1rem" }}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            fontSize: "0.875rem",
-            color: "var(--color-forest, #a8c4a0)",
-            fontWeight: 600,
-          }}
-        >
+      <div className="mb-4">
+        <div className="flex items-center gap-2 text-sm text-forest font-semibold">
           <FaSteam size={18} aria-hidden />
           <span>最近游玩</span>
-          <span style={{ fontWeight: 400, opacity: 0.85 }}>·</span>
-          <SiSteamdeck size={18} aria-hidden />
-          <span style={{ fontWeight: 500, opacity: 0.9 }}>PC & Steam Deck</span>
+          <span className="font-normal opacity-[0.85]">·</span>
+          <span className="font-medium opacity-90">PC</span>
+          {!loading && !error && data?.games.some((g) => (g.playtime_deck_forever ?? 0) > 0) && (
+            <>
+              <span className="font-normal opacity-[0.85]">·</span>
+              <SiSteamdeck size={18} aria-hidden />
+              <span className="font-medium opacity-90">Steam Deck</span>
+            </>
+          )}
         </div>
-        <blockquote
-          style={{
-            margin: "0.5rem 0 0",
-            padding: "0.5rem 0 0.5rem 0.875rem",
-            borderLeft: "3px solid var(--color-forest, #a8c4a0)",
-            fontSize: "0.8125rem",
-            color: "#555",
-            fontWeight: 400,
-            opacity: 0.9,
-          }}
-        >
+        <blockquote className="mt-2 py-2 pl-3.5 border-l-[3px] border-forest text-[0.8125rem] text-[#555] font-normal opacity-90">
           {recent_games_description}
         </blockquote>
       </div>
 
       {loading && (
-        <p style={{ margin: 0, color: "#666", fontSize: "0.875rem" }}>
+        <p className="m-0 text-gray-600 text-sm">
           正在拉取游戏记录…
         </p>
       )}
 
       {error && (
-        <p style={{ margin: 0, color: "#b55", fontSize: "0.875rem" }}>
+        <p className="m-0 text-[#b55] text-sm">
           {error}
         </p>
       )}
 
       {!loading && !error && data && (
-        <ul
-          style={{
-            margin: 0,
-            padding: 0,
-            listStyle: "none",
-            display: "flex",
-            flexDirection: "column",
-            gap: "0.5rem",
-          }}
-        >
-          {data.games.map((game) => (
-            <li
-              key={game.appid}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                padding: "0.35rem 0",
-                borderBottom: "1px solid rgba(0,0,0,0.06)",
-                fontSize: "0.875rem",
-              }}
-            >
-              {game.img_icon_url ? (
-                <Image
-                  src={getSteamImageUrl(game.appid, game.img_icon_url)}
-                  alt=""
-                  width={24}
-                  height={24}
-                  style={{ borderRadius: 4, flexShrink: 0 }}
-                />
-              ) : (
-                <span
-                  style={{
-                    width: 24,
-                    height: 24,
-                    borderRadius: 4,
-                    background: "rgba(0,0,0,0.08)",
-                    flexShrink: 0,
-                  }}
-                />
-              )}
-              <span style={{ flex: 1, fontWeight: 500 }}>{game.name}</span>
-              <span style={{ color: "#666", fontSize: "0.8125rem" }}>
-                {game.playtime_2weeks > 0
-                  ? `近两周 ${formatPlayTime(game.playtime_2weeks)}`
-                  : `总时长 ${formatPlayTime(game.playtime_forever)}`}
-              </span>
-            </li>
-          ))}
-        </ul>
+          <ul className="m-0 p-0 list-none flex flex-col gap-2">
+            {data.games.map((game) => {
+              const deckMins = game.playtime_deck_forever ?? 0;
+              const hasDeck = deckMins > 0;
+              const pcMins = game.playtime_forever - deckMins;
+              const isOpen = openAppid === game.appid;
+
+              const handleEnter = () => {
+                if (timeoutRef.current) {
+                  clearTimeout(timeoutRef.current);
+                  timeoutRef.current = null;
+                }
+                setOpenAppid(game.appid);
+              };
+              const handleLeave = () => {
+                timeoutRef.current = setTimeout(() => setOpenAppid(null), 120);
+              };
+              const handleClick = () => setOpenAppid((id) => (id === game.appid ? null : game.appid));
+
+              return (
+                <li
+                  key={game.appid}
+                  className="flex items-center gap-2 py-[0.35rem] border-b border-black/[0.06] text-sm"
+                >
+                  {game.img_icon_url ? (
+                    <Image
+                      src={getSteamImageUrl(game.appid, game.img_icon_url)}
+                      alt=""
+                      width={24}
+                      height={24}
+                      className="rounded shrink-0"
+                    />
+                  ) : (
+                    <span className="w-6 h-6 rounded bg-black/[0.08] shrink-0" />
+                  )}
+                  <span className="flex-1 font-medium">{game.name}</span>
+                  <div
+                    className="relative shrink-0"
+                    onMouseEnter={handleEnter}
+                    onMouseLeave={handleLeave}
+                  >
+                    <button
+                      type="button"
+                      onClick={handleClick}
+                      className="text-gray-600 text-[0.8125rem] inline-flex items-center gap-[0.35rem] bg-transparent border border-transparent py-1 px-2 rounded-md cursor-pointer font-inherit"
+                      title="悬停或点击查看 PC / Deck 时长"
+                    >
+                      {game.playtime_2weeks > 0
+                        ? `近两周 ${formatPlayTime(game.playtime_2weeks)}`
+                        : `总时长 ${formatPlayTime(game.playtime_forever)}`}
+                    </button>
+                    {isOpen && (
+                      <div
+                        role="tooltip"
+                        className="absolute right-0 bottom-full mb-1.5 py-2 px-3 bg-forest text-white/[0.98] text-[0.8125rem] rounded-lg shadow-[0_4px_12px_rgba(0,0,0,0.15)] whitespace-nowrap z-10 flex flex-col gap-1"
+                      >
+                        <span className="inline-flex items-center gap-[0.35rem]">
+                          <FaSteam size={12} aria-hidden />
+                          PC {formatPlayTime(pcMins)}
+                        </span>
+                        {hasDeck && (
+                          <span className="inline-flex items-center gap-[0.35rem]">
+                            <SiSteamdeck size={12} aria-hidden />
+                            Deck {formatPlayTime(deckMins)}
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
       )}
 
       {!loading && !error && data && data.games.length === 0 && (
-        <p style={{ margin: 0, color: "#666", fontSize: "0.875rem" }}>
+        <p className="m-0 text-gray-600 text-sm">
           暂无最近游玩记录。
         </p>
       )}

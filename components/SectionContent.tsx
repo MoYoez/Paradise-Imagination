@@ -13,14 +13,12 @@ export function SectionContent() {
   return (
     <div
       key={activeTheme}
-      style={{
-        animation: "section-content-fade 0.4s var(--ease-out) forwards",
-      }}
+      style={{ animation: "section-content-fade 0.4s var(--ease-out) forwards" }}
     >
-      <h2 style={{ margin: "0 0 0.5rem", fontSize: "1.25rem", fontWeight: 600 }}>
+      <h2 className="m-0 mb-2 text-xl font-semibold">
         {theme.section}
       </h2>
-      <p style={{ margin: 0, fontSize: "0.9375rem", fontWeight: 500, color: THEME_PASTEL[activeTheme] }}>
+      <p className="m-0 text-[0.9375rem] font-medium" style={{ color: THEME_PASTEL[activeTheme] }}>
         {page.imageryConsoleLike ? (
           <ConsoleLike prompt="$ " style={{ color: THEME_PASTEL[activeTheme] }}>
             {page.imagery}
@@ -29,15 +27,7 @@ export function SectionContent() {
           page.imagery
         )}
       </p>
-      <div
-        className="section-content-html"
-        style={{
-          marginTop: "1rem",
-          fontSize: "0.875rem",
-          lineHeight: 1.6,
-          color: "#000",
-        }}
-      >
+      <div className="section-content-html mt-4 text-sm leading-[1.6] text-black">
         <page.Content />
       </div>
     </div>

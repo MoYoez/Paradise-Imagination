@@ -1,0 +1,141 @@
+.rainbow-wheel-wrap--vertical {
+  width: 100%;
+  max-width: min(140px, 12vw);
+  min-width: min(100px, 10vw);
+  overflow: hidden;
+}
+.rainbow-wheel--three {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr auto;
+  gap: 0.5rem;
+  align-items: center;
+}
+.rainbow-wheel--three .wheel-slot--prev {
+  grid-column: 2;
+  grid-row: 1;
+  position: relative;
+  z-index: 2;
+}
+.rainbow-wheel--three .wheel-slot--current {
+  grid-column: 1;
+  grid-row: 2;
+  position: relative;
+  z-index: 0;
+  pointer-events: none;
+}
+.rainbow-wheel--three .wheel-slot--next {
+  grid-column: 2;
+  grid-row: 3;
+  position: relative;
+  z-index: 2;
+}
+.rainbow-wheel--three .wheel-slot {
+  transition: transform 0.5s var(--ease-spring), opacity 0.5s var(--ease-out), background var(--duration-theme-ui) var(--ease-out), color var(--duration-theme-ui) var(--ease-out), box-shadow var(--duration-theme-ui) var(--ease-out);
+}
+
+.rainbow-wheel--three.rainbow-wheel--roll-ended .wheel-slot {
+  transition-duration: 0.2s;
+}
+.rainbow-wheel--three .wheel-slot--prev,
+.rainbow-wheel--three .wheel-slot--next {
+  transform: scale(0.88);
+  opacity: 0.85;
+}
+.rainbow-wheel--three .wheel-slot--current {
+  transform: scale(1);
+  opacity: 1;
+}
+.rainbow-wheel--three .wheel-slot--prev:hover:not(:disabled),
+.rainbow-wheel--three .wheel-slot--next:hover:not(:disabled) {
+  transform: scale(0.92);
+  opacity: 0.95;
+}
+.rainbow-wheel--three.rainbow-wheel--rolling-next .wheel-slot--prev {
+  transform: translate(100%, -100%) scale(0.8);
+  opacity: 0;
+}
+.rainbow-wheel--three.rainbow-wheel--rolling-next .wheel-slot--current {
+  transform: translate(100%, -100%) scale(0.88);
+  opacity: 0.85;
+}
+.rainbow-wheel--three.rainbow-wheel--rolling-next .wheel-slot--next {
+  transform: translate(-100%, -100%) scale(1);
+  opacity: 1;
+}
+.rainbow-wheel--three.rainbow-wheel--rolling-prev .wheel-slot--prev {
+  transform: translate(-100%, 100%) scale(1);
+  opacity: 1;
+}
+.rainbow-wheel--three.rainbow-wheel--rolling-prev .wheel-slot--current {
+  transform: translate(100%, 100%) scale(0.88);
+  opacity: 0.85;
+}
+.rainbow-wheel--three.rainbow-wheel--rolling-prev .wheel-slot--next {
+  transform: translate(100%, 100%) scale(0.8);
+  opacity: 0;
+}
+.rainbow-wheel--three .wheel-slot--incoming {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+.rainbow-wheel--three .wheel-slot--incoming-next {
+  grid-column: 2;
+  grid-row: 3;
+}
+.rainbow-wheel--three.rainbow-wheel--rolling-next .wheel-slot--incoming-next {
+  animation: wheel-incoming-from-bottom 0.5s var(--ease-spring) forwards;
+}
+@keyframes wheel-incoming-from-bottom {
+  from { transform: translateY(140%) scale(0.75); opacity: 0; }
+  to { transform: translateY(0) scale(0.88); opacity: 0.85; }
+}
+.rainbow-wheel--three .wheel-slot--incoming-prev {
+  grid-column: 2;
+  grid-row: 1;
+}
+.rainbow-wheel--three.rainbow-wheel--rolling-prev .wheel-slot--incoming-prev {
+  animation: wheel-incoming-from-top 0.5s var(--ease-spring) forwards;
+}
+@keyframes wheel-incoming-from-top {
+  from { transform: translateY(-140%) scale(0.75); opacity: 0; }
+  to { transform: translateY(0) scale(0.88); opacity: 0.85; }
+}
+.rainbow-wheel--three .wheel-slot--incoming-exiting {
+  opacity: 0;
+  transition: opacity 0.12s var(--ease-out);
+  pointer-events: none;
+}
+.wheel-slot--current.wheel-slot--just-selected {
+  animation: wheel-slot-just-selected 0.4s var(--ease-spring) forwards;
+}
+@keyframes wheel-slot-just-selected {
+  from { transform: scale(0.88); }
+  to { transform: scale(1); }
+}
+
+.wheel-slot--entering {
+  animation: wheel-slot-entering 0.25s var(--ease-spring) forwards;
+}
+@keyframes wheel-slot-entering {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(0.88); opacity: 0.85; }
+}
+
+.stage--entrance .stage-wheel {
+  opacity: 0.5;
+  filter: blur(3px);
+  transition: opacity 1.4s var(--ease-out), filter 1.4s var(--ease-out);
+}
+.stage--entrance .stage-card-area {
+  opacity: 0;
+  transform: translateY(8%) scale(0.9);
+  transition: opacity 0.7s var(--ease-spring) 0.5s, transform 0.9s var(--ease-spring) 0.5s;
+}
+.stage--ready .stage-wheel,
+.stage--ready .stage-card-area {
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
