@@ -6,6 +6,9 @@ import { THEME_IDS, THEME_PASTEL, getThemeById, getThemeIndex } from "@/lib/them
 
 const N = THEME_IDS.length;
 const ROLL_DURATION_MS = 300; // set roll to 300ms.
+/** Sync theme update with roll end so current slot updates in same frame as roll clear (no flash). */
+const THEME_UPDATE_DELAY_MS = 300;
+const INCOMING_EXIT_MS = 120;
 const JUST_SELECTED_ANIMATION_MS = 400;
 const ENTERING_ANIMATION_MS = 250;
 
@@ -25,7 +28,9 @@ export function RainbowWheel() {
   const [nextEntering, setNextEntering] = useState(false);
   const rollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const rollEndedTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const animationTimeoutsRef = useRef<{ justSelected: ReturnType<typeof setTimeout> | null; entering: ReturnType<typeof setTimeout> | null }>({ justSelected: null, entering: null });
+  const animationTimeoutsRef = useRef<{ justSelected: ReturnType<typeof setTimeout> | null; entering: ReturnType<typeof setTimeout> | null; incomingExit: ReturnType<typeof setTimeout> | null }>({ justSelected: null, entering: null, incomingExit: null });
+  const [exitingIncoming, setExitingIncoming] = useState<{ id: (typeof THEME_IDS)[number]; direction: "prev" | "next" } | null>(null);
+  const lastRollRef = useRef<{ incomingId: (typeof THEME_IDS)[number]; direction: "prev" | "next" } | null>(null);
 
   const activeIndex = getThemeIndex(activeTheme);
   const prevId = THEME_IDS[prevIndex(activeIndex)];
@@ -40,6 +45,16 @@ export function RainbowWheel() {
   const ROLL_SETTLE_MS = 220;
 
   const clearRollAndStartAnimations = useCallback(() => {
+    const last = lastRollRef.current;
+    if (last) {
+      setExitingIncoming({ id: last.incomingId, direction: last.direction });
+      lastRollRef.current = null;
+      if (animationTimeoutsRef.current.incomingExit) clearTimeout(animationTimeoutsRef.current.incomingExit);
+      animationTimeoutsRef.current.incomingExit = setTimeout(() => {
+        setExitingIncoming(null);
+        animationTimeoutsRef.current.incomingExit = null;
+      }, INCOMING_EXIT_MS);
+    }
     setRollingDirection(null);
     rollTimeoutRef.current = null;
     setRollJustEnded(true);
@@ -64,19 +79,23 @@ export function RainbowWheel() {
     }, ENTERING_ANIMATION_MS);
   }, []);
 
+  const incomingToRender = exitingIncoming ?? (rollingDirection ? { id: incomingId!, direction: rollingDirection } : null);
+
   const handlePrev = useCallback(() => {
     if (isTransitioning || rollingDirection) return;
+    lastRollRef.current = { incomingId: THEME_IDS[(activeIndex - 2 + N) % N], direction: "prev" };
     setRollingDirection("prev");
-    requestThemeChange(prevId);
+    requestThemeChange(prevId, false, THEME_UPDATE_DELAY_MS);
     rollTimeoutRef.current = setTimeout(clearRollAndStartAnimations, ROLL_DURATION_MS);
-  }, [isTransitioning, rollingDirection, prevId, requestThemeChange, clearRollAndStartAnimations]);
+  }, [isTransitioning, rollingDirection, prevId, activeIndex, requestThemeChange, clearRollAndStartAnimations]);
 
   const handleNext = useCallback(() => {
     if (isTransitioning || rollingDirection) return;
+    lastRollRef.current = { incomingId: THEME_IDS[(activeIndex + 2) % N], direction: "next" };
     setRollingDirection("next");
-    requestThemeChange(nextId);
+    requestThemeChange(nextId, false, THEME_UPDATE_DELAY_MS);
     rollTimeoutRef.current = setTimeout(clearRollAndStartAnimations, ROLL_DURATION_MS);
-  }, [isTransitioning, rollingDirection, nextId, requestThemeChange, clearRollAndStartAnimations]);
+  }, [isTransitioning, rollingDirection, nextId, activeIndex, requestThemeChange, clearRollAndStartAnimations]);
 
   useEffect(() => {
     return () => {
@@ -88,6 +107,7 @@ export function RainbowWheel() {
       const anim = animationTimeoutsRef.current;
       if (anim.justSelected) clearTimeout(anim.justSelected);
       if (anim.entering) clearTimeout(anim.entering);
+      if (anim.incomingExit) clearTimeout(anim.incomingExit);
     };
   }, []);
 
@@ -161,12 +181,12 @@ export function RainbowWheel() {
         >
           {getThemeById(nextId).section}
         </button>
-        {incomingId !== null && (
+        {incomingToRender !== null && (
           <div
-            className={`wheel-slot wheel-slot--incoming wheel-slot--incoming-${rollingDirection ?? "next"}`}
+            className={`wheel-slot wheel-slot--incoming wheel-slot--incoming-${incomingToRender.direction}${exitingIncoming ? " wheel-slot--incoming-exiting" : ""}`}
             aria-hidden="true"
             style={{
-              background: THEME_PASTEL[incomingId],
+              background: THEME_PASTEL[incomingToRender.id],
               border: "none",
               borderRadius: "var(--radius-md)",
               padding: "0.5rem 0.75rem",
@@ -175,7 +195,7 @@ export function RainbowWheel() {
               boxShadow: "var(--shadow-diffuse)",
             }}
           >
-            {getThemeById(incomingId).section}
+            {getThemeById(incomingToRender.id).section}
           </div>
         )}
       </div>

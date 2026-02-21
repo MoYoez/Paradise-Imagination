@@ -522,6 +522,11 @@ html {
   from { transform: translateY(-140%) scale(0.75); opacity: 0; }
   to { transform: translateY(0) scale(0.88); opacity: 0.85; }
 }
+.rainbow-wheel--three .wheel-slot--incoming-exiting {
+  opacity: 0;
+  transition: opacity 0.12s var(--ease-out);
+  pointer-events: none;
+}
 .wheel-slot--current.wheel-slot--just-selected {
   animation: wheel-slot-just-selected 0.4s var(--ease-spring) forwards;
 }
