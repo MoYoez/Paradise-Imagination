@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "@/contexts/ThemeContext";
-import { getThemeById, THEME_PASTEL } from "@/lib/theme-config";
+import { getThemeById, THEME_PASTEL, THEME_IDS } from "@/lib/theme-config";
 import { getSectionPage } from "@/content";
 import { ConsoleLike } from "@/components/ui/ConsoleLike";
 
@@ -12,7 +12,6 @@ export function SectionContent() {
 
   return (
     <div
-      key={activeTheme}
       style={{ animation: "section-content-fade 0.4s var(--ease-out) forwards" }}
     >
       <h2 className="m-0 mb-2 text-xl font-semibold">
@@ -28,7 +27,19 @@ export function SectionContent() {
         )}
       </p>
       <div className="section-content-html mt-4 text-sm leading-[1.6] text-black">
-        <page.Content />
+        {THEME_IDS.map((id) => {
+          const sectionPage = getSectionPage(id);
+          const Content = sectionPage.Content;
+          return (
+            <div
+              key={id}
+              hidden={activeTheme !== id}
+              aria-hidden={activeTheme !== id}
+            >
+              <Content />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
