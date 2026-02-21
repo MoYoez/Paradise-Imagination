@@ -7,14 +7,14 @@ import { FaSteam } from "react-icons/fa";
 import type { GetRecentlyPlayedGamesResult } from "@/lib/steam";
 import { getSteamImageUrl } from "@/lib/steam";
 
-export const imagery = "探险地图 / 游戏手账";
-export const recent_games_description = "最近以独立游戏为主, 玩的还是老几样。";
+export const imagery = "Recent games / play log";
+export const recent_games_description = "Simple description here.";
 
 function formatPlayTime(minutes: number): string {
-  if (minutes < 60) return `${minutes} 分钟`;
+  if (minutes < 60) return `${minutes} min`;
   const h = Math.floor(minutes / 60);
   const m = minutes % 60;
-  return m > 0 ? `${h} 小时 ${m} 分` : `${h} 小时`;
+  return m > 0 ? `${h}h ${m}m` : `${h}h`;
 }
 
 export default function ForestContent() {
@@ -31,7 +31,7 @@ export default function ForestContent() {
         return res.json();
       })
       .then(setData)
-      .catch((err) => setError(err?.message ?? "加载失败"))
+      .catch((err) => setError(err?.message ?? "Failed to load"))
       .finally(() => setLoading(false));
   }, []);
 
@@ -46,7 +46,7 @@ export default function ForestContent() {
       <div className="mb-4">
         <div className="flex items-center gap-2 text-sm text-forest font-semibold">
           <FaSteam size={18} aria-hidden />
-          <span>最近游玩</span>
+          <span>Recent games</span>
           <span className="font-normal opacity-[0.85]">·</span>
           <span className="font-medium opacity-90">PC</span>
           {!loading && !error && data?.games.some((g) => (g.playtime_deck_forever ?? 0) > 0) && (
@@ -64,7 +64,7 @@ export default function ForestContent() {
 
       {loading && (
         <p className="m-0 text-gray-600 text-sm">
-          正在拉取游戏记录…
+          Loading…
         </p>
       )}
 
@@ -120,11 +120,11 @@ export default function ForestContent() {
                       type="button"
                       onClick={handleClick}
                       className="text-gray-600 text-[0.8125rem] inline-flex items-center gap-[0.35rem] bg-transparent border border-transparent py-1 px-2 rounded-md cursor-pointer font-inherit"
-                      title="悬停或点击查看 PC / Deck 时长"
+                      title="Hover or click for PC / Deck playtime"
                     >
                       {game.playtime_2weeks > 0
-                        ? `近两周 ${formatPlayTime(game.playtime_2weeks)}`
-                        : `总时长 ${formatPlayTime(game.playtime_forever)}`}
+                        ? `2w ${formatPlayTime(game.playtime_2weeks)}`
+                        : `Total ${formatPlayTime(game.playtime_forever)}`}
                     </button>
                     {isOpen && (
                       <div
@@ -152,7 +152,7 @@ export default function ForestContent() {
 
       {!loading && !error && data && data.games.length === 0 && (
         <p className="m-0 text-gray-600 text-sm">
-          暂无最近游玩记录。
+          No recent games.
         </p>
       )}
     </>
