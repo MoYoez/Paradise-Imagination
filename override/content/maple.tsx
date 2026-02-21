@@ -87,16 +87,6 @@ export default function MapleContent() {
         <div className="text-[0.9375rem] font-semibold mb-1.5 text-[var(--text-secondary,#555)]">
           Music Player
         </div>
-        {mounted ? (
-          <IframeEmbed
-            src="Simple Iframe Embed URL here."
-            width="100%"
-            height={86}
-            title="Music Player"
-          />
-        ) : (
-          <div className="maple-player-placeholder" aria-hidden />
-        )}
         <blockquote className="mt-2 pl-3 border-l-[3px] border-[var(--text-secondary,#999)] text-[0.8125rem] text-[var(--text-secondary,#555)] italic">
           Simple Quote here.
         </blockquote>
