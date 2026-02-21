@@ -1,7 +1,14 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { FaTag, FaGlobe, FaCogs, FaUser } from "react-icons/fa";
 import { SiUbuntu, SiApple, SiGit } from "react-icons/si";
-import { BlockCard } from "@/components/BlockCard";
-import { LeafTag } from "@/components/LeafTag";
+import { BlockCard } from "@/components/ui/BlockCard";
+import { LeafTag } from "@/components/ui/LeafTag";
+import { IframeEmbed } from "@/components/ui/IframeEmbed";
+
+const NETEASE_PLAYER_SRC =
+  "https://music.163.com/outchain/player?type=2&id=2137574903&auto=0&height=66";
 
 const iconStyleInLeaf = { color: "rgba(255,255,255,0.95)", flexShrink: 0 } as const;
 
@@ -24,6 +31,12 @@ const NICKNAMES = [
 const FooterContent = 'Always try to seek for Stellar and Dream 💫';
 
 export default function MapleContent() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <>
     <div className="about-content-reveal">
@@ -220,6 +233,48 @@ export default function MapleContent() {
         <p>
           {FooterContent}
         </p>
-      </BlockCard></>
+      </BlockCard>
+      <div
+        className="maple-player-wrap"
+        style={{
+          marginTop: "1rem",
+          width: "100%",
+          maxWidth: "100%",
+        }}
+      >
+        <div
+          style={{
+            fontSize: "0.9375rem",
+            fontWeight: 600,
+            marginBottom: "0.375rem",
+            color: "var(--text-secondary, #555)",
+          }}
+        >
+          Music Player
+        </div>
+        {mounted ? (
+          <IframeEmbed
+            src={NETEASE_PLAYER_SRC}
+            width="100%"
+            height={86}
+            title="Music Player"
+          />
+        ) : (
+          <div className="maple-player-placeholder" aria-hidden />
+        )}
+        <blockquote
+          style={{
+            margin: "0.5rem 0 0",
+            paddingLeft: "0.75rem",
+            borderLeft: "3px solid var(--text-secondary, #999)",
+            fontSize: "0.8125rem",
+            color: "var(--text-secondary, #555)",
+            fontStyle: "italic",
+          }}
+        >
+          原因: My Favorite Game Music In 2025
+        </blockquote>
+      </div>
+    </>
   );
 }

@@ -23,7 +23,7 @@ export function ContentCard({ children, className = "" }: ContentCardProps) {
         flexDirection: "column",
         maxHeight: "100%",
         width: "80vw",
-        maxWidth: "100%",
+        maxWidth: "min(80vw, 840px)",
         minWidth: "min(100%, 320px)",
       }}
     >

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { FaBlog, FaMusic } from "react-icons/fa";
 import { SiGithub, SiTencentqq, SiX, SiMastodon, SiDiscord } from "react-icons/si";
-import { BlockCard } from "@/components/BlockCard";
+import { BlockCard } from "@/components/ui/BlockCard";
 
 export const imagery = "Link to my social network";
 

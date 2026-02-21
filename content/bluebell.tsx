@@ -1,5 +1,5 @@
-import { ContentCard } from "@/components/ContentCard";
-import { Del } from "@/components/Del";
+import { ContentCard } from "@/components/ui/ContentCard";
+import { Del } from "@/components/ui/Del";
 
 export const imagery = "零散摘取的思绪";
 

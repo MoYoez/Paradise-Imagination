@@ -3,7 +3,7 @@
 import { useTheme } from "@/contexts/ThemeContext";
 import { getThemeById, THEME_PASTEL } from "@/lib/theme-config";
 import { getSectionPage } from "@/content";
-import { ConsoleLike } from "@/components/ConsoleLike";
+import { ConsoleLike } from "@/components/ui/ConsoleLike";
 
 export function SectionContent() {
   const { activeTheme } = useTheme();

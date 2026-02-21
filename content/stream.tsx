@@ -1,4 +1,4 @@
-import { ContentCard } from "@/components/ContentCard";
+import { ContentCard } from "@/components/ui/ContentCard";
 
 export const imagery = "实时流动的状态";
 

@@ -9,7 +9,7 @@
   <img src=".github/preview.png" alt="Preview" />
 </p>
 
-A personal site built with **Next.js**, **React**, and **Tailwind CSS**. Theme-based sections (sunset, forest, wisteria, etc.) with a simple, imaginative layout.
+✨Inspired by spontaneous imagination, this site categorizes pages by the colors of the rainbow, presenting content like a stage show.
 
 > Maple, Sunset, Sand, Forest, Stream, Bluebell, Wisteria, means seven color of rainbow.
 
