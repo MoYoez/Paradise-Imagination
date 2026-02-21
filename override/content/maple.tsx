@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { FaGlobe, FaCogs, FaUser } from "react-icons/fa";
 import { SiUbuntu, SiApple, SiGit } from "react-icons/si";
 import { BlockCard } from "@/components/ui/BlockCard";
 import { LeafTag } from "@/components/ui/LeafTag";
-import { IframeEmbed } from "@/components/ui/IframeEmbed";
 import { AboutUser } from "@/components/ui/AboutUser";
 
 const iconClassNameInLeaf = "text-white/95 shrink-0";
@@ -22,12 +20,6 @@ const NICKNAMES = [{ name: "Your Nickname" }];
 const FooterContent = "Simple Footer Content here.";
 
 export default function MapleContent() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 0);
-    return () => clearTimeout(t);
-  }, []);
-
   return (
     <>
     <div className="about-content-reveal">
