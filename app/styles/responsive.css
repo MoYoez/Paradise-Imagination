@@ -13,13 +13,15 @@
   .stage {
     height: auto !important;
     min-height: 100dvh !important;
-    grid-template-columns: 1fr !important;
-    grid-template-rows: 1fr auto !important;
+    flex-direction: column !important;
     padding: 0 !important;
     padding-bottom: 5.5rem !important;
     gap: 0.5rem !important;
   }
-  .stage-wheel {
+  .stage-book {
+    display: none !important;
+  }
+  .stage-bookmarks {
     display: none !important;
   }
   .stage-card-area {
@@ -33,6 +35,7 @@
     align-items: center;
     justify-content: center;
     margin-top: 0.5rem !important;
+    flex: 1 1 auto !important;
   }
   .stage--entrance .stage-card-area {
     transform: translateY(80%) scale(0.9);
@@ -137,6 +140,12 @@
 @media (min-width: 1032px) {
   .stage-mobile-nav {
     display: none !important;
+  }
+  .stage-book {
+    display: flex !important;
+  }
+  .stage-bookmarks {
+    display: flex !important;
   }
 }
 

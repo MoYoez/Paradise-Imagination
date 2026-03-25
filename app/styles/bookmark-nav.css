@@ -1,0 +1,238 @@
+/* ===== Bookmark Navigation - Book Ribbon Style ===== */
+
+.bookmark-nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  pointer-events: auto;
+}
+
+.bookmark-nav__container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.125rem;
+  position: relative;
+}
+
+/* ===== Bookmark Tab - Ribbon Style ===== */
+
+.bookmark-tab {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0.5rem 0.625rem 0.625rem;
+  min-width: 2.75rem;
+  background: var(--bookmark-color);
+  border: none;
+  cursor: pointer;
+  transition: 
+    height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+  transform-origin: top center;
+  z-index: calc(10 - var(--bookmark-distance, 0));
+  
+  /* Ribbon shape - pointed bottom */
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 8px),
+    50% 100%,
+    0 calc(100% - 8px)
+  );
+  
+  /* Base height for stagger effect */
+  height: 2.5rem;
+  
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Staggered height - creates cascade/ribbon bookmark look */
+.bookmark-tab:nth-child(1) { height: 2.25rem; }
+.bookmark-tab:nth-child(2) { height: 2.5rem; }
+.bookmark-tab:nth-child(3) { height: 2.75rem; }
+.bookmark-tab:nth-child(4) { height: 3rem; }
+.bookmark-tab:nth-child(5) { height: 2.75rem; }
+.bookmark-tab:nth-child(6) { height: 2.5rem; }
+.bookmark-tab:nth-child(7) { height: 2.25rem; }
+
+.bookmark-tab__label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: rgba(50, 45, 40, 0.7);
+  white-space: nowrap;
+  transition: color 0.2s ease, font-weight 0.2s ease;
+  writing-mode: horizontal-tb;
+  padding-bottom: 0.375rem;
+}
+
+/* ===== Active State - Pulled out bookmark ===== */
+
+.bookmark-tab--active {
+  height: 3.75rem !important;
+  z-index: 20;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.12),
+    0 4px 8px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.bookmark-tab--active .bookmark-tab__label {
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: rgba(50, 45, 40, 0.9);
+}
+
+/* ===== Hover State ===== */
+
+.bookmark-tab:not(.bookmark-tab--active):hover:not(:disabled) {
+  height: calc(var(--base-height, 2.5rem) + 0.5rem);
+  box-shadow: 
+    0 6px 16px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.bookmark-tab:nth-child(1):not(.bookmark-tab--active):hover:not(:disabled) { height: 2.75rem; }
+.bookmark-tab:nth-child(2):not(.bookmark-tab--active):hover:not(:disabled) { height: 3rem; }
+.bookmark-tab:nth-child(3):not(.bookmark-tab--active):hover:not(:disabled) { height: 3.25rem; }
+.bookmark-tab:nth-child(4):not(.bookmark-tab--active):hover:not(:disabled) { height: 3.5rem; }
+.bookmark-tab:nth-child(5):not(.bookmark-tab--active):hover:not(:disabled) { height: 3.25rem; }
+.bookmark-tab:nth-child(6):not(.bookmark-tab--active):hover:not(:disabled) { height: 3rem; }
+.bookmark-tab:nth-child(7):not(.bookmark-tab--active):hover:not(:disabled) { height: 2.75rem; }
+
+.bookmark-tab:not(.bookmark-tab--active):hover:not(:disabled) .bookmark-tab__label {
+  color: rgba(50, 45, 40, 0.85);
+}
+
+/* ===== Disabled State ===== */
+
+.bookmark-tab:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* ===== Focus State ===== */
+
+.bookmark-tab:focus-visible {
+  outline: 2px solid rgba(80, 70, 60, 0.3);
+  outline-offset: 2px;
+}
+
+/* ===== Active Animation ===== */
+
+@keyframes bookmark-pull {
+  0% {
+    height: var(--start-height, 2.5rem);
+  }
+  50% {
+    height: 4rem;
+  }
+  100% {
+    height: 3.75rem;
+  }
+}
+
+.bookmark-tab--active {
+  animation: bookmark-pull 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ===== Desktop Enhancements ===== */
+
+@media (min-width: 768px) {
+  .bookmark-nav__container {
+    gap: 0.1875rem;
+  }
+  
+  .bookmark-tab {
+    padding: 0.625rem 0.75rem 0.75rem;
+    min-width: 3.25rem;
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - 10px),
+      50% 100%,
+      0 calc(100% - 10px)
+    );
+  }
+  
+  .bookmark-tab__label {
+    font-size: 0.75rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  .bookmark-tab:nth-child(1) { height: 2.75rem; }
+  .bookmark-tab:nth-child(2) { height: 3.125rem; }
+  .bookmark-tab:nth-child(3) { height: 3.5rem; }
+  .bookmark-tab:nth-child(4) { height: 3.875rem; }
+  .bookmark-tab:nth-child(5) { height: 3.5rem; }
+  .bookmark-tab:nth-child(6) { height: 3.125rem; }
+  .bookmark-tab:nth-child(7) { height: 2.75rem; }
+  
+  .bookmark-tab--active {
+    height: 4.75rem !important;
+  }
+  
+  .bookmark-tab--active .bookmark-tab__label {
+    font-size: 0.8125rem;
+  }
+  
+  .bookmark-tab:nth-child(1):not(.bookmark-tab--active):hover:not(:disabled) { height: 3.25rem; }
+  .bookmark-tab:nth-child(2):not(.bookmark-tab--active):hover:not(:disabled) { height: 3.625rem; }
+  .bookmark-tab:nth-child(3):not(.bookmark-tab--active):hover:not(:disabled) { height: 4rem; }
+  .bookmark-tab:nth-child(4):not(.bookmark-tab--active):hover:not(:disabled) { height: 4.375rem; }
+  .bookmark-tab:nth-child(5):not(.bookmark-tab--active):hover:not(:disabled) { height: 4rem; }
+  .bookmark-tab:nth-child(6):not(.bookmark-tab--active):hover:not(:disabled) { height: 3.625rem; }
+  .bookmark-tab:nth-child(7):not(.bookmark-tab--active):hover:not(:disabled) { height: 3.25rem; }
+}
+
+@media (min-width: 1024px) {
+  .bookmark-nav__container {
+    gap: 0.25rem;
+  }
+  
+  .bookmark-tab {
+    padding: 0.75rem 1rem 1rem;
+    min-width: 4rem;
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - 12px),
+      50% 100%,
+      0 calc(100% - 12px)
+    );
+  }
+  
+  .bookmark-tab__label {
+    font-size: 0.8125rem;
+    padding-bottom: 0.625rem;
+  }
+  
+  .bookmark-tab:nth-child(1) { height: 3.25rem; }
+  .bookmark-tab:nth-child(2) { height: 3.75rem; }
+  .bookmark-tab:nth-child(3) { height: 4.25rem; }
+  .bookmark-tab:nth-child(4) { height: 4.75rem; }
+  .bookmark-tab:nth-child(5) { height: 4.25rem; }
+  .bookmark-tab:nth-child(6) { height: 3.75rem; }
+  .bookmark-tab:nth-child(7) { height: 3.25rem; }
+  
+  .bookmark-tab--active {
+    height: 5.75rem !important;
+  }
+  
+  .bookmark-tab--active .bookmark-tab__label {
+    font-size: 0.875rem;
+  }
+  
+  .bookmark-tab:nth-child(1):not(.bookmark-tab--active):hover:not(:disabled) { height: 3.75rem; }
+  .bookmark-tab:nth-child(2):not(.bookmark-tab--active):hover:not(:disabled) { height: 4.25rem; }
+  .bookmark-tab:nth-child(3):not(.bookmark-tab--active):hover:not(:disabled) { height: 4.75rem; }
+  .bookmark-tab:nth-child(4):not(.bookmark-tab--active):hover:not(:disabled) { height: 5.25rem; }
+  .bookmark-tab:nth-child(5):not(.bookmark-tab--active):hover:not(:disabled) { height: 4.75rem; }
+  .bookmark-tab:nth-child(6):not(.bookmark-tab--active):hover:not(:disabled) { height: 4.25rem; }
+  .bookmark-tab:nth-child(7):not(.bookmark-tab--active):hover:not(:disabled) { height: 3.75rem; }
+}
