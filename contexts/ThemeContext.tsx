@@ -34,6 +34,8 @@ const DURATIONS = {
   deal: 400,
 } as const;
 const TOTAL_TRANSITION = DURATIONS.take + DURATIONS.wheel + DURATIONS.select + DURATIONS.deal;
+/** Bookmark nav uses themeDelayMs=0; cover section slide + bookmark motion (see globals --duration-*). */
+const FAST_NAV_LOCK_MS = 600;
 
 const DefaultTheme = "maple";
 const DefaultThemeId = THEME_IDS.find((id) => id === DefaultTheme) as ThemeId;
@@ -66,13 +68,21 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       // Update theme immediately for responsive feel
       requestAnimationFrame(() => {
         setActiveThemeState(id);
-      });
-      
-      // Clear transition state after animation completes
-      setTimeout(() => {
-        setTransitioning(false);
-        setSlideDirection(null);
-      }, transitionMs);
+        const lockMs = 400;
+        setTimeout(() => {
+          setTransitioning(false);
+          setSlideDirection(null);
+        }, lockMs);
+      } else {
+        const delay = themeDelayMs ?? DURATIONS.take;
+        setTimeout(() => setActiveThemeState(id), delay);
+        const lockMs =
+          themeDelayMs === 0 ? FAST_NAV_LOCK_MS : TOTAL_TRANSITION - DURATIONS.deal;
+        setTimeout(() => {
+          setTransitioning(false);
+          setSlideDirection(null);
+        }, lockMs);
+      }
     },
     [activeTheme, isTransitioning]
   );

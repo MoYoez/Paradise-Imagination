@@ -10,10 +10,37 @@ export function SectionContent() {
   const theme = getThemeById(activeTheme);
   const page = getSectionPage(activeTheme);
   
-  // Determine animation class based on slide direction
-  const animationClass = slideDirection 
-    ? (slideDirection === "left" ? "slide-left" : "slide-right")
-    : "";
+  useEffect(() => {
+    if (activeTheme !== prevThemeRef.current) {
+      setIsAnimating(true);
+      // Midpoint of exit — keep in sync with --duration-section-slide in globals.css
+      const timer = setTimeout(() => {
+        setDisplayTheme(activeTheme);
+        prevThemeRef.current = activeTheme;
+      }, 260);
+      
+      // After slide-out + slide-in complete
+      const resetTimer = setTimeout(() => {
+        setIsAnimating(false);
+      }, 620);
+      
+      return () => {
+        clearTimeout(timer);
+        clearTimeout(resetTimer);
+      };
+    }
+  }, [activeTheme]);
+
+  const displayThemeData = getThemeById(displayTheme);
+  const displayPage = getSectionPage(displayTheme);
+  
+  // Determine animation class
+  const getAnimationClass = () => {
+    if (!isAnimating) return "";
+    if (slideDirection === "left") return "slide-out-left";
+    if (slideDirection === "right") return "slide-out-right";
+    return "";
+  };
 
   return (
     <div className="section-content-wrapper">

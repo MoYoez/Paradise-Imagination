@@ -12,18 +12,17 @@
 }
 
 .section-content-slide {
-  will-change: transform, opacity;
-  animation: content-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: slide-in var(--duration-section-slide) var(--ease-out) forwards;
 }
 
-/* Slide from right (going to higher index - left direction) */
-.section-content-slide.slide-left {
-  animation: slide-from-right 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+/* Slide out to left (going to higher index) */
+.section-content-slide.slide-out-left {
+  animation: slide-out-left var(--duration-section-slide) var(--ease-out) forwards;
 }
 
-/* Slide from left (going to lower index - right direction) */
-.section-content-slide.slide-right {
-  animation: slide-from-left 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+/* Slide out to right (going to lower index) */
+.section-content-slide.slide-out-right {
+  animation: slide-out-right var(--duration-section-slide) var(--ease-out) forwards;
 }
 
 @keyframes content-enter {
