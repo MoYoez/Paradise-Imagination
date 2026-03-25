@@ -17,7 +17,8 @@ export const imagery = "! ✨ [Thinking...] No output and go to sleep 😴";
 export const imageryConsoleLike = true; // require enable in index.ts to show console-like style
 
 
-const AVATAR_URL = "https://gravatar.com/avatar/24972965681ebfcf8369dcecbc7080fa?size=256";
+/** Same-origin proxy; actual upstream is AVATAR_SOURCE_URL (server env, see .env.example). */
+const AVATAR_URL = "/api/avatar";
 const NAME = "MoeMagicMango";
 const TAG = "#Magician";
 
