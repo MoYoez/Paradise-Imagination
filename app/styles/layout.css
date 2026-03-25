@@ -39,6 +39,58 @@ html {
 .content-card-body {
   box-shadow: inset 0 1px 0 rgba(255, 252, 248, 0.6);
   background: linear-gradient(180deg, rgba(253, 251, 248, 0.5) 0%, transparent 12%);
+  
+  /* Custom scrollbar - elegant thin style */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(180, 170, 160, 0.35) transparent;
+}
+
+/* Webkit scrollbar styling */
+.content-card-body::-webkit-scrollbar {
+  width: 4px;
+  height: 6px;
+}
+
+.content-card-body::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 8px 0;
+}
+
+.content-card-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(200, 190, 180, 0.4) 0%,
+    rgba(180, 170, 160, 0.5) 50%,
+    rgba(200, 190, 180, 0.4) 100%
+  );
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: background 0.3s ease;
+}
+
+.content-card-body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(180, 170, 160, 0.55) 0%,
+    rgba(160, 150, 140, 0.65) 50%,
+    rgba(180, 170, 160, 0.55) 100%
+  );
+}
+
+.content-card-body::-webkit-scrollbar-thumb:active {
+  background: rgba(150, 140, 130, 0.7);
+}
+
+/* Hide scrollbar when not scrolling (mobile UX enhancement) */
+.content-card-body::-webkit-scrollbar-thumb {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.content-card-body:hover::-webkit-scrollbar-thumb,
+.content-card-body:focus::-webkit-scrollbar-thumb,
+.content-card-body:active::-webkit-scrollbar-thumb {
+  opacity: 1;
 }
 
 .content-card--nested {

@@ -59,7 +59,6 @@ const stageStyle: React.CSSProperties = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  padding: "2rem",
   boxSizing: "border-box",
 };
 
@@ -94,7 +93,6 @@ const cardAreaStyle: React.CSSProperties = {
 };
 
 const mobileCardAreaStyle: React.CSSProperties = {
-  display: "none",
   width: "100%",
   alignItems: "center",
   justifyContent: "center",
