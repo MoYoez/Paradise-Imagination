@@ -94,7 +94,6 @@ const cardAreaStyle: React.CSSProperties = {
 };
 
 const mobileCardAreaStyle: React.CSSProperties = {
-  display: "none",
   width: "100%",
   alignItems: "center",
   justifyContent: "center",
