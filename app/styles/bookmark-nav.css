@@ -30,8 +30,8 @@
   cursor: pointer;
   will-change: transform;
   transition: 
-    transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    box-shadow 0.2s ease;
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease;
   transform-origin: top center;
   z-index: calc(10 - var(--bookmark-distance, 0));
   
@@ -91,14 +91,16 @@
 /* ===== Hover State ===== */
 
 .bookmark-tab:not(.bookmark-tab--active):hover:not(:disabled) {
-  transform: scaleY(1.12);
+  transform: scaleY(1.18) translateY(-3px);
   box-shadow: 
-    0 6px 16px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    0 10px 24px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  filter: brightness(1.02);
 }
 
 .bookmark-tab:not(.bookmark-tab--active):hover:not(:disabled) .bookmark-tab__label {
-  color: rgba(50, 45, 40, 0.85);
+  color: rgba(50, 45, 40, 0.95);
+  transform: scale(1.02);
 }
 
 /* ===== Disabled State ===== */
@@ -117,20 +119,29 @@
 
 /* ===== Active Animation ===== */
 
-@keyframes bookmark-pop {
+@keyframes bookmark-pull {
   0% {
-    transform: scaleY(1);
+    transform: scaleY(1) translateY(0);
+    filter: brightness(1);
+  }
+  25% {
+    transform: scaleY(1.22) translateY(-6px);
+    filter: brightness(1.05);
   }
   50% {
-    transform: scaleY(1.08);
+    transform: scaleY(0.94) translateY(-2px);
+  }
+  75% {
+    transform: scaleY(1.04) translateY(-1px);
   }
   100% {
-    transform: scaleY(1);
+    transform: scaleY(1) translateY(0);
+    filter: brightness(1);
   }
 }
 
 .bookmark-tab--active {
-  animation: bookmark-pop 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: bookmark-pull 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ===== Desktop Enhancements ===== */

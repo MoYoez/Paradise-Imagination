@@ -60,10 +60,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       
       setTransitioning(true);
       
-      // Simplified, faster transition timing
-      const transitionMs = immediate ? 200 : (themeDelayMs ?? 250);
+      // Transition timing - balanced for smooth animation feel with elegance
+      const transitionMs = immediate ? 350 : (themeDelayMs ?? 550);
       
-      // Update theme immediately for faster perceived response
+      // Update theme immediately for responsive feel
       requestAnimationFrame(() => {
         setActiveThemeState(id);
       });
