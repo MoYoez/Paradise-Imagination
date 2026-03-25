@@ -12,7 +12,7 @@ export const imagery = "Simple Imagery here.";
 export const imageryConsoleLike = true; // require enable in index.ts to show console-like style
 
 
-const AVATAR_URL = "Simple Avatar URL here.";
+const AVATAR_URL = "/api/avatar";
 const NAME = "Your Name";
 const TAG = "#Your Tag";
 

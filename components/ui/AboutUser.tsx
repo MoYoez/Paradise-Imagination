@@ -17,7 +17,7 @@ export function AboutUser({ avatarUrl, name, tag, accentColor = "rgba(0,0,0,0.45
       <div className="shrink-0 flex flex-col items-center gap-2 min-w-[88px]">
         <div className="w-[72px] h-[72px] rounded-full overflow-hidden bg-black/[0.06]">
           {avatarUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element -- Gravatar loaded in browser to avoid server-side ECONNRESET (e.g. GFW)
+            // eslint-disable-next-line @next/next/no-img-element -- avatar is same-origin (/api/avatar proxy)
             <img
               src={avatarUrl}
               alt=""

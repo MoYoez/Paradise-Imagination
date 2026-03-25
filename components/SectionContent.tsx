@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import { getThemeById, THEME_PASTEL, THEME_IDS } from "@/lib/theme-config";
 import { getSectionPage } from "@/content";
@@ -7,9 +8,13 @@ import { ConsoleLike } from "@/components/ui/ConsoleLike";
 
 export function SectionContent() {
   const { activeTheme, slideDirection } = useTheme();
-  const theme = getThemeById(activeTheme);
-  const page = getSectionPage(activeTheme);
-  
+  const [displayTheme, setDisplayTheme] = useState(activeTheme);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const prevThemeRef = useRef(activeTheme);
+
+  const displayThemeData = getThemeById(displayTheme);
+  const displayPage = getSectionPage(displayTheme);
+
   useEffect(() => {
     if (activeTheme !== prevThemeRef.current) {
       setIsAnimating(true);
@@ -18,12 +23,12 @@ export function SectionContent() {
         setDisplayTheme(activeTheme);
         prevThemeRef.current = activeTheme;
       }, 260);
-      
+
       // After slide-out + slide-in complete
       const resetTimer = setTimeout(() => {
         setIsAnimating(false);
       }, 620);
-      
+
       return () => {
         clearTimeout(timer);
         clearTimeout(resetTimer);
@@ -31,10 +36,6 @@ export function SectionContent() {
     }
   }, [activeTheme]);
 
-  const displayThemeData = getThemeById(displayTheme);
-  const displayPage = getSectionPage(displayTheme);
-  
-  // Determine animation class
   const getAnimationClass = () => {
     if (!isAnimating) return "";
     if (slideDirection === "left") return "slide-out-left";
@@ -45,19 +46,19 @@ export function SectionContent() {
   return (
     <div className="section-content-wrapper">
       <div
-        key={activeTheme}
-        className={`section-content-slide ${animationClass}`}
+        key={displayTheme}
+        className={`section-content-slide ${getAnimationClass()}`}
       >
         <h2 className="m-0 mb-2 text-xl font-semibold">
-          {theme.section}
+          {displayThemeData.section}
         </h2>
-        <p className="m-0 text-[0.9375rem] font-medium" style={{ color: THEME_PASTEL[activeTheme] }}>
-          {page.imageryConsoleLike ? (
-            <ConsoleLike prompt="$ " style={{ color: THEME_PASTEL[activeTheme] }}>
-              {page.imagery}
+        <p className="m-0 text-[0.9375rem] font-medium" style={{ color: THEME_PASTEL[displayTheme] }}>
+          {displayPage.imageryConsoleLike ? (
+            <ConsoleLike prompt="$ " style={{ color: THEME_PASTEL[displayTheme] }}>
+              {displayPage.imagery}
             </ConsoleLike>
           ) : (
-            page.imagery
+            displayPage.imagery
           )}
         </p>
         <div className="section-content-html mt-4 text-sm leading-[1.6] text-black">
@@ -67,8 +68,8 @@ export function SectionContent() {
             return (
               <div
                 key={id}
-                hidden={activeTheme !== id}
-                aria-hidden={activeTheme !== id}
+                hidden={displayTheme !== id}
+                aria-hidden={displayTheme !== id}
               >
                 <Content />
               </div>

@@ -8,11 +8,6 @@ const nextConfig: NextConfig = {
         hostname: "media.steampowered.com",
         pathname: "/steamcommunity/public/images/apps/**",
       },
-      {
-        protocol: "https",
-        hostname: "gravatar.com",
-        pathname: "/avatar/**",
-      },
     ],
   },
 };
