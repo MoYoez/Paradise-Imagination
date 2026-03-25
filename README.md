@@ -46,6 +46,8 @@ Open [http://localhost:3000](http://localhost:3000).
 
 > If you need to integrate Steam, you need to add STEAM_WEB_API_KEY and STEAM_USER_ID_64 to your env before using.
 
+> Avatar Needs to be set by using the env "AVATAR_SOURCE_URL"
+
 ### Build
 
 ```bash

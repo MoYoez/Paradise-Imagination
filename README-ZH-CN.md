@@ -46,6 +46,8 @@ pnpm run dev
 
 > 如需集成 Steam，请在使用前在环境变量中添加 STEAM_WEB_API_KEY 和 STEAM_USER_ID_64。
 
+> 头像需通过环境变量 "AVATAR_SOURCE_URL" 设置
+
 ### 构建
 
 ```bash
