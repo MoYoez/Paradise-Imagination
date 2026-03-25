@@ -59,21 +59,20 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       setSlideDirection(direction);
       
       setTransitioning(true);
-      if (immediate) {
+      
+      // Simplified, faster transition timing
+      const transitionMs = immediate ? 200 : (themeDelayMs ?? 250);
+      
+      // Update theme immediately for faster perceived response
+      requestAnimationFrame(() => {
         setActiveThemeState(id);
-        const lockMs = 280;
-        setTimeout(() => {
-          setTransitioning(false);
-          setSlideDirection(null);
-        }, lockMs);
-      } else {
-        const delay = themeDelayMs ?? DURATIONS.take;
-        setTimeout(() => setActiveThemeState(id), delay);
-        setTimeout(() => {
-          setTransitioning(false);
-          setSlideDirection(null);
-        }, TOTAL_TRANSITION - DURATIONS.deal);
-      }
+      });
+      
+      // Clear transition state after animation completes
+      setTimeout(() => {
+        setTransitioning(false);
+        setSlideDirection(null);
+      }, transitionMs);
     },
     [activeTheme, isTransitioning]
   );
