@@ -17,16 +17,16 @@ export function SectionContent() {
   useEffect(() => {
     if (activeTheme !== prevThemeRef.current) {
       setIsAnimating(true);
-      // Small delay to allow exit animation, then update display
+      // Midpoint of exit — keep in sync with --duration-section-slide in globals.css
       const timer = setTimeout(() => {
         setDisplayTheme(activeTheme);
         prevThemeRef.current = activeTheme;
-      }, 150);
+      }, 260);
       
-      // Reset animation state after full animation
+      // After slide-out + slide-in complete
       const resetTimer = setTimeout(() => {
         setIsAnimating(false);
-      }, 400);
+      }, 620);
       
       return () => {
         clearTimeout(timer);

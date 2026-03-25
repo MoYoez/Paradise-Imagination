@@ -59,7 +59,6 @@ const stageStyle: React.CSSProperties = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  padding: "2rem",
   boxSizing: "border-box",
 };
 

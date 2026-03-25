@@ -12,17 +12,17 @@
 }
 
 .section-content-slide {
-  animation: slide-in 0.35s var(--ease-out) forwards;
+  animation: slide-in var(--duration-section-slide) var(--ease-out) forwards;
 }
 
 /* Slide out to left (going to higher index) */
 .section-content-slide.slide-out-left {
-  animation: slide-out-left 0.35s var(--ease-out) forwards;
+  animation: slide-out-left var(--duration-section-slide) var(--ease-out) forwards;
 }
 
 /* Slide out to right (going to lower index) */
 .section-content-slide.slide-out-right {
-  animation: slide-out-right 0.35s var(--ease-out) forwards;
+  animation: slide-out-right var(--duration-section-slide) var(--ease-out) forwards;
 }
 
 @keyframes slide-in {

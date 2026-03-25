@@ -161,6 +161,44 @@
   }
 }
 
+/*
+ * Desktop book + ribbon bookmarks: bookmarks sit below the card (translateY(100%)).
+ * On short viewports (e.g. iPad landscape), reserve extra bottom space and lift the block
+ * so ribbons are not clipped by layout-root overflow.
+ * Horizontal/vertical padding scales with viewport width and height.
+ */
+@media (min-width: 1032px) {
+  .stage {
+    padding-top: max(env(safe-area-inset-top, 0px), clamp(0.5rem, 2vmin, 2rem));
+    padding-bottom: clamp(2.5rem, 5.5vmin + 1.25vw, 4.5rem);
+    padding-left: clamp(0.75rem, 2.25vw + 0.25rem, 2rem);
+    padding-right: clamp(0.75rem, 2.25vw + 0.25rem, 2rem);
+    box-sizing: border-box;
+  }
+}
+
+@media (min-width: 1032px) and (max-height: 920px) {
+  .stage {
+    padding-top: max(env(safe-area-inset-top, 0px), clamp(0.25rem, 1.5vmin, 1rem));
+    /* Extra bottom inset shifts the centered group upward so bookmarks clear the fold */
+    padding-bottom: clamp(3.25rem, 9vmin + 1.5vw, 6rem);
+    padding-left: clamp(0.65rem, 2vw + 0.35rem, 1.75rem);
+    padding-right: clamp(0.65rem, 2vw + 0.35rem, 1.75rem);
+  }
+  .stage-book {
+    transform: translateY(-1rem);
+  }
+}
+
+@media (min-width: 1032px) and (max-height: 780px) {
+  .stage {
+    padding-bottom: clamp(3.75rem, 11vmin, 6.5rem);
+  }
+  .stage-book {
+    transform: translateY(-1.35rem);
+  }
+}
+
 .stage--ready .rainbow-wheel--three .wheel-slot--current {
   animation: wheel-current-pulse 3s ease-in-out infinite;
 }
