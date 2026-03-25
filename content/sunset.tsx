@@ -2,15 +2,12 @@
 import Link from "next/link";
 import { SiGithub } from "react-icons/si";
 
-export const imagery = "燃烧过的创作痕迹";
+export const imagery = "Side projects / toys";
 
 const GITHUB = "https://github.com";
 
 const TOYS: Array<{ repo: string; description: string }> = [
-  { repo: "Hafuunano/Lucy-QOnebot", description: "Lucy For Onebot" },
-  { repo: "MoYoez/Decky-LocalSend", description: "在 Steam Deck 游戏模式下使用 LocalSend" },
-  { repo: "MoYoez/gravity-progressbar", description: "重力模拟进度条?" },
-  { repo: "FloatTech/ZeroBot-Plugin", description: "Zerobot 系 Bot 插件组" },
+  { repo: "username/repo-name", description: "Short description" },
 ];
 
 function RepoBadges({ repo }: { repo: string }) {
@@ -73,7 +70,7 @@ export default function SunsetContent() {
                   fontWeight: 600,
                 }}
               >
-                项目
+                Project
               </th>
               <th
                 style={{
@@ -83,7 +80,7 @@ export default function SunsetContent() {
                   fontWeight: 600,
                 }}
               >
-                描述
+                Description
               </th>
               <th
                 style={{
