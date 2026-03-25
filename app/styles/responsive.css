@@ -24,6 +24,12 @@
   .stage-bookmarks {
     display: none !important;
   }
+  .stage-card-area--desktop {
+    display: none !important;
+  }
+  .stage-card-area--mobile {
+    display: flex !important;
+  }
   .stage-card-area {
     min-height: 0;
     padding: 0 !important;
@@ -146,6 +152,12 @@
   }
   .stage-bookmarks {
     display: flex !important;
+  }
+  .stage-card-area--desktop {
+    display: flex !important;
+  }
+  .stage-card-area--mobile {
+    display: none !important;
   }
 }
 

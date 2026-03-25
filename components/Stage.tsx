@@ -92,3 +92,10 @@ const cardAreaStyle: React.CSSProperties = {
   alignItems: "center",
   justifyContent: "center",
 };
+
+const mobileCardAreaStyle: React.CSSProperties = {
+  display: "none",
+  width: "100%",
+  alignItems: "center",
+  justifyContent: "center",
+};
