@@ -61,7 +61,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       setSlideDirection(direction);
       
       setTransitioning(true);
-      if (immediate) {
+      
+      // Transition timing - balanced for smooth animation feel with elegance
+      const transitionMs = immediate ? 350 : (themeDelayMs ?? 550);
+      
+      // Update theme immediately for responsive feel
+      requestAnimationFrame(() => {
         setActiveThemeState(id);
         const lockMs = 400;
         setTimeout(() => {

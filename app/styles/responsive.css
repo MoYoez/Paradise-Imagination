@@ -11,12 +11,14 @@
     background-repeat: no-repeat;
   }
   .stage {
-    height: auto !important;
+    height: 100dvh !important;
     min-height: 100dvh !important;
+    max-height: 100dvh !important;
     flex-direction: column !important;
     padding: 0 !important;
     padding-bottom: 5.5rem !important;
-    gap: 0.5rem !important;
+    gap: 0 !important;
+    overflow: hidden !important;
   }
   .stage-book {
     display: none !important;
@@ -29,37 +31,64 @@
   }
   .stage-card-area--mobile {
     display: flex !important;
-  }
-  .stage-card-area {
     min-height: 0;
-    padding: 0 !important;
+    padding: 1rem 0.75rem !important;
+    padding-top: max(1rem, env(safe-area-inset-top)) !important;
+    padding-right: calc(0.75rem + 4px) !important;
     align-self: stretch !important;
-    max-height: 80vh;
-    max-width: 100% !important;
+    max-height: calc(100dvh - 5.5rem - env(safe-area-inset-bottom)) !important;
     width: 100% !important;
-    display: flex;
-    align-items: center;
+    align-items: flex-start !important;
     justify-content: center;
-    margin-top: 0.5rem !important;
+    margin-top: 0 !important;
     flex: 1 1 auto !important;
+    overflow-y: overlay !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
   }
-  .stage--entrance .stage-card-area {
+  .stage--entrance .stage-card-area--mobile {
     transform: translateY(80%) scale(0.9);
     transition: opacity 0.6s var(--ease-spring) 0.4s, transform 0.7s var(--ease-spring) 0.4s;
   }
-  .stage--ready .stage-card-area {
+  .stage--ready .stage-card-area--mobile {
     transform: translateY(0) scale(1);
   }
   .content-card {
     width: 92% !important;
     max-width: 92% !important;
     min-width: 0 !important;
+    max-height: 100% !important;
     box-sizing: border-box !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    margin-top: 0.5rem !important;
   }
   .content-card-body {
     padding: 1rem 1.25rem !important;
+    /* Mobile scrollbar refinements */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(180, 170, 160, 0.3) transparent;
+  }
+  
+  /* Thinner, more elegant scrollbar on mobile */
+  .content-card-body::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .content-card-body::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 12px 0;
+    border-radius: 4px;
+  }
+  
+  .content-card-body::-webkit-scrollbar-thumb {
+    background: rgba(180, 170, 160, 0.35);
+    border-radius: 4px;
+    border: none;
+  }
+  
+  .content-card-body::-webkit-scrollbar-thumb:active {
+    background: rgba(160, 150, 140, 0.5);
   }
   .stage-mobile-nav {
     position: relative;
@@ -114,9 +143,13 @@
 }
 
 @media (max-width: 420px) {
+  .stage-card-area--mobile {
+    padding: 0.75rem 0.5rem !important;
+    padding-top: max(0.75rem, env(safe-area-inset-top)) !important;
+  }
   .content-card {
-    width: 90% !important;
-    max-width: 90% !important;
+    width: 94% !important;
+    max-width: 94% !important;
   }
   .content-card-body {
     padding: 0.875rem 1rem !important;
@@ -141,6 +174,11 @@
   .leaf-tag--with-icon {
     width: 6.75rem !important;
   }
+}
+
+/* Default: hide mobile card, show on mobile via media query above */
+.stage-card-area--mobile {
+  display: none;
 }
 
 @media (min-width: 1032px) {

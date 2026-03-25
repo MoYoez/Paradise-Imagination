@@ -91,22 +91,16 @@
 /* ===== Hover State ===== */
 
 .bookmark-tab:not(.bookmark-tab--active):hover:not(:disabled) {
-  height: calc(var(--base-height, 2.5rem) + 0.5rem);
+  transform: scaleY(1.18) translateY(-3px);
   box-shadow: 
-    0 6px 16px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    0 10px 24px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  filter: brightness(1.02);
 }
 
-.bookmark-tab:nth-child(1):not(.bookmark-tab--active):hover:not(:disabled) { height: 2.75rem; }
-.bookmark-tab:nth-child(2):not(.bookmark-tab--active):hover:not(:disabled) { height: 3rem; }
-.bookmark-tab:nth-child(3):not(.bookmark-tab--active):hover:not(:disabled) { height: 3.25rem; }
-.bookmark-tab:nth-child(4):not(.bookmark-tab--active):hover:not(:disabled) { height: 3.5rem; }
-.bookmark-tab:nth-child(5):not(.bookmark-tab--active):hover:not(:disabled) { height: 3.25rem; }
-.bookmark-tab:nth-child(6):not(.bookmark-tab--active):hover:not(:disabled) { height: 3rem; }
-.bookmark-tab:nth-child(7):not(.bookmark-tab--active):hover:not(:disabled) { height: 2.75rem; }
-
 .bookmark-tab:not(.bookmark-tab--active):hover:not(:disabled) .bookmark-tab__label {
-  color: rgba(50, 45, 40, 0.85);
+  color: rgba(50, 45, 40, 0.95);
+  transform: scale(1.02);
 }
 
 /* ===== Disabled State ===== */
@@ -127,13 +121,22 @@
 
 @keyframes bookmark-pull {
   0% {
-    height: var(--start-height, 2.5rem);
+    transform: scaleY(1) translateY(0);
+    filter: brightness(1);
+  }
+  25% {
+    transform: scaleY(1.22) translateY(-6px);
+    filter: brightness(1.05);
   }
   50% {
-    height: 4rem;
+    transform: scaleY(0.94) translateY(-2px);
+  }
+  75% {
+    transform: scaleY(1.04) translateY(-1px);
   }
   100% {
-    height: 3.75rem;
+    transform: scaleY(1) translateY(0);
+    filter: brightness(1);
   }
 }
 
@@ -181,13 +184,6 @@
     font-size: 0.8125rem;
   }
   
-  .bookmark-tab:nth-child(1):not(.bookmark-tab--active):hover:not(:disabled) { height: 3.25rem; }
-  .bookmark-tab:nth-child(2):not(.bookmark-tab--active):hover:not(:disabled) { height: 3.625rem; }
-  .bookmark-tab:nth-child(3):not(.bookmark-tab--active):hover:not(:disabled) { height: 4rem; }
-  .bookmark-tab:nth-child(4):not(.bookmark-tab--active):hover:not(:disabled) { height: 4.375rem; }
-  .bookmark-tab:nth-child(5):not(.bookmark-tab--active):hover:not(:disabled) { height: 4rem; }
-  .bookmark-tab:nth-child(6):not(.bookmark-tab--active):hover:not(:disabled) { height: 3.625rem; }
-  .bookmark-tab:nth-child(7):not(.bookmark-tab--active):hover:not(:disabled) { height: 3.25rem; }
 }
 
 @media (min-width: 1024px) {
@@ -228,11 +224,4 @@
     font-size: 0.875rem;
   }
   
-  .bookmark-tab:nth-child(1):not(.bookmark-tab--active):hover:not(:disabled) { height: 3.75rem; }
-  .bookmark-tab:nth-child(2):not(.bookmark-tab--active):hover:not(:disabled) { height: 4.25rem; }
-  .bookmark-tab:nth-child(3):not(.bookmark-tab--active):hover:not(:disabled) { height: 4.75rem; }
-  .bookmark-tab:nth-child(4):not(.bookmark-tab--active):hover:not(:disabled) { height: 5.25rem; }
-  .bookmark-tab:nth-child(5):not(.bookmark-tab--active):hover:not(:disabled) { height: 4.75rem; }
-  .bookmark-tab:nth-child(6):not(.bookmark-tab--active):hover:not(:disabled) { height: 4.25rem; }
-  .bookmark-tab:nth-child(7):not(.bookmark-tab--active):hover:not(:disabled) { height: 3.75rem; }
 }

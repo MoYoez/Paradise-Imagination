@@ -1,18 +1,14 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
-import { getThemeById, THEME_PASTEL, THEME_IDS, getThemeIndex } from "@/lib/theme-config";
+import { getThemeById, THEME_PASTEL, THEME_IDS } from "@/lib/theme-config";
 import { getSectionPage } from "@/content";
 import { ConsoleLike } from "@/components/ui/ConsoleLike";
 
 export function SectionContent() {
-  const { activeTheme, slideDirection, isTransitioning } = useTheme();
+  const { activeTheme, slideDirection } = useTheme();
   const theme = getThemeById(activeTheme);
   const page = getSectionPage(activeTheme);
-  const [displayTheme, setDisplayTheme] = useState(activeTheme);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const prevThemeRef = useRef(activeTheme);
   
   useEffect(() => {
     if (activeTheme !== prevThemeRef.current) {
@@ -49,19 +45,19 @@ export function SectionContent() {
   return (
     <div className="section-content-wrapper">
       <div
-        key={displayTheme}
-        className={`section-content-slide ${getAnimationClass()}`}
+        key={activeTheme}
+        className={`section-content-slide ${animationClass}`}
       >
         <h2 className="m-0 mb-2 text-xl font-semibold">
-          {displayThemeData.section}
+          {theme.section}
         </h2>
-        <p className="m-0 text-[0.9375rem] font-medium" style={{ color: THEME_PASTEL[displayTheme] }}>
-          {displayPage.imageryConsoleLike ? (
-            <ConsoleLike prompt="$ " style={{ color: THEME_PASTEL[displayTheme] }}>
-              {displayPage.imagery}
+        <p className="m-0 text-[0.9375rem] font-medium" style={{ color: THEME_PASTEL[activeTheme] }}>
+          {page.imageryConsoleLike ? (
+            <ConsoleLike prompt="$ " style={{ color: THEME_PASTEL[activeTheme] }}>
+              {page.imagery}
             </ConsoleLike>
           ) : (
-            displayPage.imagery
+            page.imagery
           )}
         </p>
         <div className="section-content-html mt-4 text-sm leading-[1.6] text-black">
@@ -71,8 +67,8 @@ export function SectionContent() {
             return (
               <div
                 key={id}
-                hidden={displayTheme !== id}
-                aria-hidden={displayTheme !== id}
+                hidden={activeTheme !== id}
+                aria-hidden={activeTheme !== id}
               >
                 <Content />
               </div>
