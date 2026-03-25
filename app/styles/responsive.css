@@ -58,6 +58,30 @@
   }
   .content-card-body {
     padding: 1rem 1.25rem !important;
+    /* Mobile scrollbar refinements */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(180, 170, 160, 0.3) transparent;
+  }
+  
+  /* Thinner, more elegant scrollbar on mobile */
+  .content-card-body::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .content-card-body::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 12px 0;
+    border-radius: 4px;
+  }
+  
+  .content-card-body::-webkit-scrollbar-thumb {
+    background: rgba(180, 170, 160, 0.35);
+    border-radius: 4px;
+    border: none;
+  }
+  
+  .content-card-body::-webkit-scrollbar-thumb:active {
+    background: rgba(160, 150, 140, 0.5);
   }
   .stage-mobile-nav {
     position: relative;
