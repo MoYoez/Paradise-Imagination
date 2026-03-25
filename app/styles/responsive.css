@@ -11,12 +11,14 @@
     background-repeat: no-repeat;
   }
   .stage {
-    height: auto !important;
+    height: 100dvh !important;
     min-height: 100dvh !important;
+    max-height: 100dvh !important;
     flex-direction: column !important;
     padding: 0 !important;
     padding-bottom: 5.5rem !important;
-    gap: 0.5rem !important;
+    gap: 0 !important;
+    overflow: hidden !important;
   }
   .stage-book {
     display: none !important;
@@ -31,15 +33,17 @@
     display: flex !important;
     min-height: 0;
     padding: 1rem 0.75rem !important;
+    padding-top: max(1rem, env(safe-area-inset-top)) !important;
     align-self: stretch !important;
-    max-height: calc(100vh - 6.5rem - env(safe-area-inset-bottom)) !important;
+    max-height: calc(100dvh - 5.5rem - env(safe-area-inset-bottom)) !important;
     max-width: 100% !important;
     width: 100% !important;
-    align-items: center;
+    align-items: flex-start !important;
     justify-content: center;
-    margin-top: 0.5rem !important;
+    margin-top: 0 !important;
     flex: 1 1 auto !important;
     overflow-y: auto !important;
+    overflow-x: hidden !important;
   }
   .stage--entrance .stage-card-area--mobile {
     transform: translateY(80%) scale(0.9);
@@ -52,9 +56,11 @@
     width: 92% !important;
     max-width: 92% !important;
     min-width: 0 !important;
+    max-height: 100% !important;
     box-sizing: border-box !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    margin-top: 0.5rem !important;
   }
   .content-card-body {
     padding: 1rem 1.25rem !important;
@@ -138,10 +144,11 @@
 @media (max-width: 420px) {
   .stage-card-area--mobile {
     padding: 0.75rem 0.5rem !important;
+    padding-top: max(0.75rem, env(safe-area-inset-top)) !important;
   }
   .content-card {
-    width: 90% !important;
-    max-width: 90% !important;
+    width: 94% !important;
+    max-width: 94% !important;
   }
   .content-card-body {
     padding: 0.875rem 1rem !important;
