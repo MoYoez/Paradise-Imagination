@@ -51,9 +51,9 @@ const stageStyle: React.CSSProperties = {
   gridTemplateRows: "1fr",
   alignItems: "center",
   justifyItems: "center",
-  padding: "2rem",
+  padding: "2.5rem 3rem",
   boxSizing: "border-box",
-  gap: "1rem",
+  gap: "2rem",
 };
 
 const wheelAreaStyle: React.CSSProperties = {
