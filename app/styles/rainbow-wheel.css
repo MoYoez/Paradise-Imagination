@@ -1,7 +1,7 @@
 .rainbow-wheel-wrap--vertical {
   width: 100%;
-  max-width: min(140px, 12vw);
-  min-width: min(100px, 10vw);
+  max-width: min(160px, 13vw);
+  min-width: min(120px, 11vw);
   overflow: hidden;
 }
 .rainbow-wheel--three {

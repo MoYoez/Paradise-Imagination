@@ -11,6 +11,8 @@ import {
 import type { ThemeId } from "@/lib/theme-config";
 import { THEME_IDS } from "@/lib/theme-config";
 
+export type SlideDirection = "left" | "right" | null;
+
 interface ThemeContextValue {
   activeTheme: ThemeId;
   setActiveTheme: (id: ThemeId) => void;
@@ -18,6 +20,7 @@ interface ThemeContextValue {
   setHasCompletedEntrance: (v: boolean) => void;
   isTransitioning: boolean;
   setTransitioning: (v: boolean) => void;
+  slideDirection: SlideDirection;
   /** When themeDelayMs is set (e.g. for wheel), activeTheme updates after that delay to sync with animation. */
   requestThemeChange: (id: ThemeId, immediate?: boolean, themeDelayMs?: number) => void;
 }
@@ -39,6 +42,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [activeTheme, setActiveThemeState] = useState<ThemeId>(DefaultThemeId);
   const [hasCompletedEntrance, setHasCompletedEntrance] = useState(false);
   const [isTransitioning, setTransitioning] = useState(false);
+  const [slideDirection, setSlideDirection] = useState<SlideDirection>(null);
 
   const setActiveTheme = useCallback((id: ThemeId) => {
     setActiveThemeState(id);
@@ -47,15 +51,28 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const requestThemeChange = useCallback(
     (id: ThemeId, immediate = false, themeDelayMs?: number) => {
       if (id === activeTheme || isTransitioning) return;
+      
+      // Determine slide direction based on theme index
+      const currentIndex = THEME_IDS.indexOf(activeTheme);
+      const newIndex = THEME_IDS.indexOf(id);
+      const direction: SlideDirection = newIndex > currentIndex ? "left" : "right";
+      setSlideDirection(direction);
+      
       setTransitioning(true);
       if (immediate) {
         setActiveThemeState(id);
         const lockMs = 280;
-        setTimeout(() => setTransitioning(false), lockMs);
+        setTimeout(() => {
+          setTransitioning(false);
+          setSlideDirection(null);
+        }, lockMs);
       } else {
         const delay = themeDelayMs ?? DURATIONS.take;
         setTimeout(() => setActiveThemeState(id), delay);
-        setTimeout(() => setTransitioning(false), TOTAL_TRANSITION - DURATIONS.deal);
+        setTimeout(() => {
+          setTransitioning(false);
+          setSlideDirection(null);
+        }, TOTAL_TRANSITION - DURATIONS.deal);
       }
     },
     [activeTheme, isTransitioning]
@@ -69,6 +86,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       setHasCompletedEntrance,
       isTransitioning,
       setTransitioning,
+      slideDirection,
       requestThemeChange,
     }),
     [
@@ -76,6 +94,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       setActiveTheme,
       hasCompletedEntrance,
       isTransitioning,
+      slideDirection,
       requestThemeChange,
     ]
   );
