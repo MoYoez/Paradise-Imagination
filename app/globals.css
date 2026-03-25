@@ -4,6 +4,7 @@
 @import "./styles/themes.css";
 @import "./styles/content.css";
 @import "./styles/rainbow-wheel.css";
+@import "./styles/bookmark-nav.css";
 @import "./styles/responsive.css";
 
 @theme {

@@ -3,6 +3,69 @@
   100% { opacity: 1; }
 }
 
+/* ===== Slide Animation for Content ===== */
+
+.section-content-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.section-content-slide {
+  animation: slide-in 0.35s var(--ease-out) forwards;
+}
+
+/* Slide out to left (going to higher index) */
+.section-content-slide.slide-out-left {
+  animation: slide-out-left 0.35s var(--ease-out) forwards;
+}
+
+/* Slide out to right (going to lower index) */
+.section-content-slide.slide-out-right {
+  animation: slide-out-right 0.35s var(--ease-out) forwards;
+}
+
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-left {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-right {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .section-content-html p { margin: 0 0 0.75em; }
 .section-content-html p:last-child { margin-bottom: 0; }
 .section-content-html a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
