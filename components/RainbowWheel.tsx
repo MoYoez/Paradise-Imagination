@@ -129,12 +129,12 @@ export function RainbowWheel() {
           style={{
             background: THEME_PASTEL[activeTheme],
             borderRadius: "var(--radius-lg)",
-            padding: "1rem 1.25rem",
-            fontSize: "1rem",
+            padding: "0.75rem 1rem",
+            fontSize: "0.9375rem",
             fontWeight: 600,
-            color: "rgba(50,45,40,0.9)",
-            boxShadow: "var(--shadow-diffuse-lg), inset 0 1px 0 rgba(255,255,255,0.6)",
-            border: "2.5px solid rgba(255,255,255,0.65)",
+            color: "rgba(50,45,40,0.85)",
+            boxShadow: "var(--shadow-diffuse-lg)",
+            border: "2px solid rgba(255,255,255,0.5)",
           }}
         >
           {getThemeById(activeTheme).section}
@@ -149,13 +149,13 @@ export function RainbowWheel() {
           onClick={handlePrev}
           style={{
             background: THEME_PASTEL[prevId],
-            border: "1.5px solid rgba(255,255,255,0.4)",
+            border: "none",
             borderRadius: "var(--radius-md)",
-            padding: "0.625rem 0.875rem",
-            fontSize: "0.875rem",
-            color: "rgba(60,55,50,0.75)",
+            padding: "0.5rem 0.75rem",
+            fontSize: "0.8125rem",
+            color: "rgba(60,55,50,0.7)",
             cursor: isTransitioning || isRolling ? "not-allowed" : "pointer",
-            boxShadow: "0 4px 16px rgba(0, 0, 0, 0.05)",
+            boxShadow: "var(--shadow-diffuse)",
           }}
         >
           {getThemeById(prevId).section}
@@ -170,13 +170,13 @@ export function RainbowWheel() {
           onClick={handleNext}
           style={{
             background: THEME_PASTEL[nextId],
-            border: "1.5px solid rgba(255,255,255,0.4)",
+            border: "none",
             borderRadius: "var(--radius-md)",
-            padding: "0.625rem 0.875rem",
-            fontSize: "0.875rem",
-            color: "rgba(60,55,50,0.75)",
+            padding: "0.5rem 0.75rem",
+            fontSize: "0.8125rem",
+            color: "rgba(60,55,50,0.7)",
             cursor: isTransitioning || isRolling ? "not-allowed" : "pointer",
-            boxShadow: "0 4px 16px rgba(0, 0, 0, 0.05)",
+            boxShadow: "var(--shadow-diffuse)",
           }}
         >
           {getThemeById(nextId).section}
@@ -187,12 +187,12 @@ export function RainbowWheel() {
             aria-hidden="true"
             style={{
               background: THEME_PASTEL[incomingToRender.id],
-              border: "1.5px solid rgba(255,255,255,0.4)",
+              border: "none",
               borderRadius: "var(--radius-md)",
-              padding: "0.625rem 0.875rem",
-              fontSize: "0.875rem",
-              color: "rgba(60,55,50,0.75)",
-              boxShadow: "0 4px 16px rgba(0, 0, 0, 0.05)",
+              padding: "0.5rem 0.75rem",
+              fontSize: "0.8125rem",
+              color: "rgba(60,55,50,0.7)",
+              boxShadow: "var(--shadow-diffuse)",
             }}
           >
             {getThemeById(incomingToRender.id).section}
