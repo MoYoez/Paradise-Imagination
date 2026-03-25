@@ -47,7 +47,7 @@ html {
 
 /* Webkit scrollbar styling */
 .content-card-body::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
   height: 6px;
 }
 
